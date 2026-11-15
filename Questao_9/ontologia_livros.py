@@ -1,7 +1,9 @@
 """Questão 9 — Sistema de recomendação de livros baseado em ontologia OWL 2.
 1) Gera livros.owl (abra no Protégé e rode HermiT/Pellet para conferir).
 2) Mini-reasoner em Python (subclasses, inversas, transitividade, classes definidas, consistência) p/ rodar sem Java.
-3) Recomendador com justificativa. Títulos/autores são fictícios."""
+3) Recomendador com justificativa. Títulos/autores são fictícios.
+Uso:  python ontologia_livros.py            -> demonstração (Ana, Bruno, Carla)
+      python ontologia_livros.py --usuario  -> o usuário informa o próprio perfil e recebe recomendações"""
 import re, sys
 from owlgen import build, restr, inter
 
@@ -127,7 +129,54 @@ def recomendar(leitor, ind, top=3):
         res.append((sc, n, b["data"]["titulo"][0], just))
     return sorted(res, reverse=True)[:top]
 
+
+# ----------------------------- Entrada do usuário (modo interativo) -----------------------------
+def _escolher(titulo, opcoes, multiplo=True, obrigatorio=True):
+    """Mostra opções numeradas e devolve a lista de itens escolhidos."""
+    print(f"\n{titulo}")
+    for k, o in enumerate(opcoes, 1): print(f"  {k}) {o}")
+    while True:
+        r = input("> " + ("números separados por vírgula: " if multiplo else "número: ")).strip()
+        if not r and not obrigatorio: return []
+        try:
+            idx = [int(x) for x in r.replace(" ", "").split(",") if x]
+            if idx and all(1 <= i <= len(opcoes) for i in idx) and (multiplo or len(idx) == 1):
+                return [opcoes[i-1] for i in idx]
+        except ValueError: pass
+        print("  Entrada inválida, tente de novo.")
+
+def entrevistar():
+    """Coleta o perfil do usuário e o insere na ABox como um novo indivíduo da classe Leitor."""
+    print("=== Recomendador de livros (ontologia OWL 2) — informe seu perfil ===")
+    nome = input("Seu nome: ").strip() or "Usuario"
+    ident = re.sub(r"\W", "", nome) or "Usuario"
+    if ident in IND: ident += "_novo"
+    temas = sorted(n for n, i in IND.items() if i["types"] == ["Tema"])
+    livros = sorted(n for n, i in IND.items() if i["types"][0].startswith("Livro"))
+    t = _escolher("Temas de interesse:", temas)
+    nivel = _escolher("Seu nível de leitura:", ["Iniciante", "Intermediario", "Avancado"], multiplo=False)
+    idi = _escolher("Idiomas que você lê:", ["Portugues", "Ingles"])
+    print("\nLivros que você já leu (Enter para nenhum):")
+    for l in livros: print(f"  {l}  {IND[l]['data']['titulo'][0]}")
+    lidos = [x.strip().upper() for x in input("> códigos separados por vírgula: ").split(",") if x.strip().upper() in livros]
+    IND[ident] = dict(types=["Leitor"], obj=dict(interessadoEm=t, prefereIdioma=idi, temNivelLeitura=nivel, jaLeu=lidos),
+                      data=dict(nome=(nome, "string")))
+    return ident
+
+def modo_usuario():
+    u = entrevistar()
+    ind, log, erros = raciocinar(IND)
+    if erros: print("Base inconsistente:", erros); return
+    print(f"\n[reasoner] perfil inserido como indivíduo '{u}' : Leitor; ontologia CONSISTENTE")
+    if "LeitorIniciante" in ind[u]["types"]: print(f"[reasoner] {u} foi classificado automaticamente como LeitorIniciante")
+    print(f"\n== Recomendações para {u} (interesses: {sorted(IND[u]['obj']['interessadoEm'])}; nível: {IND[u]['obj']['temNivelLeitura'][0]}) ==")
+    rec = recomendar(u, ind, top=5)
+    if not rec: print("  Nenhum livro atende ao perfil (tema, idioma e nível). Tente ampliar interesses ou idiomas.")
+    for sc, n, t, j in rec: print(f"  {sc:5.2f}  {n} {t}\n         - " + "\n         - ".join(j))
+
 if __name__ == "__main__":
+    if "--usuario" in sys.argv:
+        modo_usuario(); sys.exit()
     xml = build(BASE, CLASSES, OBJ, DATA, IND, DISJ)
     open("livros.owl", "w", encoding="utf-8").write(xml)
     print(f"livros.owl gerado: {len(CLASSES)} classes, {len(OBJ)} propriedades de objeto + {len(DATA)} de dados = {len(OBJ)+len(DATA)} propriedades, {len(IND)} indivíduos")
