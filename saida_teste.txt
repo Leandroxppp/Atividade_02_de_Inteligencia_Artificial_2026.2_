@@ -1,5 +1,5 @@
-﻿
-===== Questao_2 : knn.py =====
+
+===== Questao_02 : knn.py =====
 Pesos (ganho de informação): {'Historia_Credito': 0.328, 'Divida': 0.154, 'Garantia': 0.288, 'Renda': 0.973, 'Emprego': 0.948, 'Patrimonio': 1.263}
 
 === k=1 (Hamming) ===
@@ -118,7 +118,7 @@ Acurácia Leave-One-Out
   7     96.7%      93.3%
   9     96.7%      93.3%
 
-===== Questao_3 : eliza.py --demo =====
+===== Questao_03 : eliza.py --demo =====
 ELIZA: Como você está? Conte-me seu problema.
 
 USUÁRIO: Olá, estou muito cansado ultimamente.
@@ -169,7 +169,7 @@ USUÁRIO: Qual é o sentido da vida?
     [trace] sem palavra-chave -> usa MEMÓRIA
 ELIZA:   Antes você disse que eu odeio meu chefe. Isso tem a ver com o que você sente agora?
 
-===== Questao_6 : fuzzy_credito.py =====
+===== Questao_06 : fuzzy_credito.py =====
 
 === Cliente A (renda alta, pouco endividado, bom histórico): renda=32k, comprometimento=12%, histórico=9
 Fuzzificação:
@@ -226,14 +226,14 @@ Regras ativadas (força = min dos antecedentes):
 Defuzzificação (centroide): risco = 33.4 -> MODERADO
   Outros defuzzificadores: bisetriz=35.0 | média dos máximos=25.5
 
-===== Questao_6 : fuzzy_skfuzzy.py =====
+===== Questao_06 : fuzzy_skfuzzy.py =====
 Cliente A: risco(skfuzzy, centroide) = 14.8  | NumPy: 15.0
 Cliente B: risco(skfuzzy, centroide) = 50.0  | NumPy: 50.0
 Cliente C: risco(skfuzzy, centroide) = 86.8  | NumPy: 86.7
 Cliente D: risco(skfuzzy, centroide) = 50.0  | NumPy: 50.0
 Cliente E: risco(skfuzzy, centroide) = 33.3  | NumPy: 33.4
 
-===== Questao_7 : cbr_medico.py --demo =====
+===== Questao_07 : cbr_medico.py --demo =====
 Base: 18 casos, 6 doenças
 
 Sintomas informados: febre_alta, dor_atras_dos_olhos, dor_muscular, manchas_na_pele | idade=30 | dias=3
@@ -291,7 +291,7 @@ REUSE — diagnóstico sugerido: Gripe (confiança relativa 79%); ranking: Gripe
 
 Leave-one-out nos 18 casos originais: 13/18 = 72%
 
-===== Questao_7 : avaliacao.py =====
+===== Questao_07 : avaliacao.py =====
 Base: 18 casos
 pesos (sintomas, idade, duração)   k=1    k=3    k=5
 (0.85, 0.1, 0.05)                 66.7%  66.7%  72.2%
@@ -300,7 +300,7 @@ pesos (sintomas, idade, duração)   k=1    k=3    k=5
 (0.9, 0.1, 0)                     72.2%  72.2%  72.2%
 (0.6, 0.3, 0.1)                   61.1%  66.7%  72.2%
 
-===== Questao_8 : rede_bayesiana.py =====
+===== Questao_08 : rede_bayesiana.py =====
 A priori: P(Pneumonia)=0.0579
 
 === Experimento 1: atualização sequencial ===
@@ -331,7 +331,7 @@ Pneumonia=Não {'Febre': 0.1, 'Tosse': 0.144, 'Dispneia': 0.05, 'RaioX': 0.03}
 
 Febre⟂Tosse|Pneumonia? P(F|P,T)=0.8500 = P(F|P)=0.8500;  mas sem P: P(F|T)=0.3126 ≠ P(F)=0.1434
 
-===== Questao_8 : rede_pgmpy.py =====
+===== Questao_08 : rede_pgmpy.py =====
 {}                                                                          pgmpy=0.0579  enumeração=0.0579  OK
 {'Febre': 'Sim'}                                                            pgmpy=0.3430  enumeração=0.3430  OK
 {'Febre': 'Sim', 'Tosse': 'Sim'}                                            pgmpy=0.7708  enumeração=0.7708  OK
@@ -340,7 +340,7 @@ Febre⟂Tosse|Pneumonia? P(F|P,T)=0.8500 = P(F|P)=0.8500;  mas sem P: P(F|T)=0.3
 {'Tosse': 'Sim', 'Fumante': 'Sim'}                                          pgmpy=0.2569  enumeração=0.2569  OK
 {'RaioX': 'Nao', 'Febre': 'Sim', 'Tosse': 'Sim'}                            pgmpy=0.2574  enumeração=0.2574  OK
 
-===== Questao_9 : ontologia_livros.py =====
+===== Questao_09 : ontologia_livros.py =====
 livros.owl gerado: 18 classes, 12 propriedades de objeto + 6 de dados = 18 propriedades, 42 indivíduos
 
 == Consistência == CONSISTENTE
@@ -423,7 +423,7 @@ livros.owl gerado: 18 classes, 12 propriedades de objeto + 6 de dados = 18 propr
 
 == Teste de inconsistência (indivíduo LX ∈ LivroTecnico ⊓ LivroFiccao) == ['LX pertence a classes disjuntas LivroTecnico e LivroFiccao']
 
-===== Questao_9 : rodar_reasoner.py =====
+===== Questao_09 : rodar_reasoner.py =====
 Classes: 18 | Propriedades: 18 | Indivíduos: 42
 
 == Consistência == CONSISTENTE (HermiT não encontrou contradição)

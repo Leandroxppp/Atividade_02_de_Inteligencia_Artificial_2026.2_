@@ -1,4 +1,4 @@
-﻿# Lista 2 — Inteligência Artificial (PPGI 2026.2) — respostas e código
+# Lista 2 — Inteligência Artificial (PPGI 2026.2) — respostas e código
 
 Cada pasta `Questao_N/` tem um `README.md` com o relatório e, quando aplicável, o código, os dados e as saídas (`resultados.txt`).
 
@@ -25,16 +25,16 @@ Todos os scripts foram executados e as saídas estão guardadas (`resultados.txt
 
 | Item | Validação | Arquivo |
 |---|---|---|
-| Q9 e Q15 | **HermiT** (Owlready2 + Java): consistência, classificação automática, inversas/transitivas e teste de inconsistência; coincide com o reasoner mínimo em Python | `Questao_9/hermit_real.txt`, `Questao_15/hermit_real.txt` |
-| Q6 | Versão **scikit-fuzzy** executada; centroides iguais aos do NumPy (±0,2) | `Questao_6/skfuzzy_real.txt` |
-| Q8 | Versão **pgmpy** executada; `OK` em todas as consultas. Também exportada e validada no **GeNIe Trial** (`rede_pneumonia.xdsl`, prints em `Questao_8/prints/`) | `Questao_8/pgmpy_real.txt`, `rede_pneumonia.xdsl` |
+| Q9 e Q15 | **HermiT** (Owlready2 + Java): consistência, classificação automática, inversas/transitivas e teste de inconsistência; coincide com o reasoner mínimo em Python | `Questao_09/hermit_real.txt`, `Questao_15/hermit_real.txt` |
+| Q6 | Versão **scikit-fuzzy** executada; centroides iguais aos do NumPy (±0,2) | `Questao_06/skfuzzy_real.txt` |
+| Q8 | Versão **pgmpy** executada; `OK` em todas as consultas. Também exportada e validada no **GeNIe Trial** (`rede_pneumonia.xdsl`, prints em `Questao_08/prints/`) | `Questao_08/pgmpy_real.txt`, `rede_pneumonia.xdsl` |
 | Q12 | Caminho LLM testado com **LLM local via Ollama** (`llama3.2` e `qwen2.5:7b`): verificador, nova tentativa com feedback e alternativa offline; também com servidor simulado | `Questao_12/Q12_llm_ollama.txt`, `Q12_llm_qwen.txt`, `llm_stub_test.txt` |
 | Q14 | Script Cypher executado no **Neo4j 5** (Docker + `cypher-shell`); respostas iguais às do `kg_saude.py` | `Questao_14/Q14_neo4j.txt` |
 
 ## Limitações conhecidas
 * **Q12:** testado com LLM local via Ollama (`llama3.2` 3B e `qwen2.5:7b`) em duas rodadas (seções 6 e 9 do README da Q12). Rodada 2: o LLM produziu o plano final em 1 de 6 execuções. Rodada 3 (15/11/2026, com as melhorias da seção 7): 5 de 6 planos vieram do LLM e passaram no verificador, 1 veio da alternativa offline e nenhuma execução ficou sem plano; porém esses planos apresentam divergências semânticas que o verificador não detecta (tarefa omitida, prioridade invertida), documentadas na seção 9. Não foi testado com a API da Anthropic. <!-- rodada3-ollama -->
 * **Q14:** o script Cypher foi executado no Neo4j 5 (Docker, `cypher-shell`); saída em `Questao_14/Q14_neo4j.txt`, com as mesmas respostas do `kg_saude.py`.
-* **Q9 e Q15:** o reasoner foi executado por código (HermiT via Owlready2) e também no **Protégé** com HermiT 1.4.3.456; os prints estão em `Questao_9/prints/` e `Questao_15/prints/` (com `LEIAME.md` descrevendo cada um). <!-- evidencia-protege -->
+* **Q9 e Q15:** o reasoner foi executado por código (HermiT via Owlready2) e também no **Protégé** com HermiT 1.4.3.456; os prints estão em `Questao_09/prints/` e `Questao_15/prints/` (com `LEIAME.md` descrevendo cada um). <!-- evidencia-protege -->
 * Bases de casos, CPTs, pesos e funções de pertinência são **fictícios/educacionais** (justificados nos relatórios), não calibrados com dados reais.
 
 ## Dependências e execução
