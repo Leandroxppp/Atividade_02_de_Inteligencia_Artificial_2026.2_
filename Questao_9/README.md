@@ -1,4 +1,4 @@
-# Questão 9 — Sistema de recomendação de livros baseado em ontologia OWL 2
+﻿# Questão 9 — Sistema de recomendação de livros baseado em ontologia OWL 2
 
 Arquivos: `livros.owl` (ontologia), `ontologia_livros.py` (ontologia + reasoner mínimo + recomendador), `rodar_reasoner.py` (**HermiT real** via Owlready2), `owlgen.py` (gerador RDF/XML), `resultados.txt`, `hermit_real.txt` e `prints/` (evidências no Protégé, com `prints/LEIAME.md`).
 Execução: `python ontologia_livros.py` (demonstração com Ana, Bruno e Carla) ou `python ontologia_livros.py --usuario` (o usuário informa o próprio perfil; seção 6).
@@ -20,6 +20,12 @@ LeituraRapidaParaIniciante ≡ LivroCurto ⊓ LivroIniciante
 ```
 **42 indivíduos:** 12 livros, 6 autores, 3 editoras, 4 gêneros, 9 temas, 3 níveis, 2 idiomas, 3 leitores (Ana, Bruno, Carla).
 
+### 2.1 Justificativa das principais classes e propriedades
+* **Livro, Pessoa, Editora, Genero, Tema, Nivel e Idioma são classes disjuntas, e não textos soltos.** Tema, Nivel e Idioma são classes de indivíduos para que o perfil do leitor e as características do livro sejam ligados por propriedades de objeto (`interessadoEm` e `abordaTema`, `prefereIdioma` e `escritoEmIdioma`, `temNivelLeitura` e `temNivel`). A disjunção permite ao reasoner detectar erros de modelagem, como no teste de inconsistência.
+* **Autor e Leitor são subclasses de Pessoa**, porque são papéis diferentes da mesma entidade. **LivroDidatico ⊑ LivroTecnico, disjunta de LivroFiccao**, permite inferir que um didático também é técnico e que um livro não pode ser técnico e ficção ao mesmo tempo.
+* **As classes definidas (LivroCurto, LivroIniciante, LivroDeIA, LivroBemAvaliado, LeituraRapidaParaIniciante e LeitorIniciante) levam os critérios de recomendação para dentro da ontologia.** Por exemplo, "curto" é `numPaginas ≤ 250` e "bem avaliado" é `nota ≥ 4,5`. Assim o reasoner classifica os indivíduos automaticamente e as justificativas citam classes inferidas, e não condições escritas em código.
+* **`escritoPor` e `escreveu` são inversas**, o que permite descobrir relações implícitas (por exemplo, `AutorSilva escreveu L01`) sem declará-las. **`ehPrerequisitoDe` é transitiva**, e por isso o sistema avisa quando um pré-requisito indireto ainda não foi lido. **`publicadoPor`, `temNivel`, `escritoEmIdioma` e `temNivelLeitura` são funcionais**, pois cada livro ou leitor tem um único valor.
+* **`interessadoEm`, `prefereIdioma`, `temNivelLeitura` e `jaLeu` descrevem o perfil do usuário** e são o ponto de contato com o recomendador. **As propriedades de dados** (`titulo`, `numPaginas`, `anoPublicacao`, `nota`, `preco`, `nome`) permitem restrições de faixa nas classes definidas.
 ## 3. Inferências demonstradas (`resultados.txt`)
 * **Classificação automática:** `LivroCurto` = L04, L05, L07, L09, L12; `LeituraRapidaParaIniciante` = L04, L05, L07, L12; `LivroBemAvaliado` = L01, L03, L04, L07, L09, L10; `LeitorIniciante` = Ana, Carla.
 * **Relações implícitas:** `AutorSilva escreveu L01` (inversa); `L04 ehPrerequisitoDe L03` (L04→L02→L03, transitividade); `L01 : LivroTecnico` (LivroDidatico ⊑ LivroTecnico).
@@ -49,4 +55,6 @@ Os prints estão em `prints/` e cada um é descrito em `prints/LEIAME.md`. Resum
 | Consultas semânticas (DL Query) e base da recomendação | `08`, `09` |
 | Verificação de consistência (inconsistência explicada pelo HermiT) | `10_inconsistencia_explicacao_HermiT.png` |
 
-**Demonstração em vídeo:** `../demo_lista2.mp4` (execução no terminal e no Protégé; inclui a Q9, com o modo interativo).
+**Demonstração em vídeo:** `../demo_lista2_final.mp4` (execução no terminal e no Protégé; inclui a Q9, com o modo interativo).
+
+
