@@ -1,0 +1,53 @@
+network pneumonia {
+}
+variable Fumante {
+  type discrete [ 2 ] { Sim, Nao };
+}
+variable Contato {
+  type discrete [ 2 ] { Sim, Nao };
+}
+variable Pneumonia {
+  type discrete [ 2 ] { Sim, Nao };
+}
+variable Febre {
+  type discrete [ 2 ] { Sim, Nao };
+}
+variable Tosse {
+  type discrete [ 2 ] { Sim, Nao };
+}
+variable Dispneia {
+  type discrete [ 2 ] { Sim, Nao };
+}
+variable RaioX {
+  type discrete [ 2 ] { Sim, Nao };
+}
+probability ( Fumante ) {
+  table 0.25, 0.75;
+}
+probability ( Contato ) {
+  table 0.15, 0.85;
+}
+probability ( Pneumonia | Fumante, Contato ) {
+  (Sim, Sim) 0.3, 0.7;
+  (Sim, Nao) 0.08, 0.92;
+  (Nao, Sim) 0.15, 0.85;
+  (Nao, Nao) 0.02, 0.98;
+}
+probability ( Febre | Pneumonia ) {
+  (Sim) 0.85, 0.15;
+  (Nao) 0.1, 0.9;
+}
+probability ( Tosse | Pneumonia, Fumante ) {
+  (Sim, Sim) 0.95, 0.05;
+  (Sim, Nao) 0.9, 0.1;
+  (Nao, Sim) 0.35, 0.65;
+  (Nao, Nao) 0.08, 0.92;
+}
+probability ( Dispneia | Pneumonia ) {
+  (Sim) 0.7, 0.3;
+  (Nao) 0.05, 0.95;
+}
+probability ( RaioX | Pneumonia ) {
+  (Sim) 0.9, 0.1;
+  (Nao) 0.03, 0.97;
+}

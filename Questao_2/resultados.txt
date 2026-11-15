@@ -1,0 +1,117 @@
+Pesos (ganho de informação): {'Historia_Credito': 0.328, 'Divida': 0.154, 'Garantia': 0.288, 'Renda': 0.973, 'Emprego': 0.948, 'Patrimonio': 1.263}
+
+=== k=1 (Hamming) ===
+
+Consulta: {'Historia_Credito': 'Boa', 'Divida': 'Alta', 'Garantia': 'Nenhuma', 'Renda': '15-35k', 'Emprego': 'Estavel', 'Patrimonio': 'Medio'}
+ID     dist  classe   | atributos
+E12    0.00  Moderado | ['Boa', 'Alta', 'Nenhuma', '15-35k', 'Estavel', 'Medio'] <-- vizinho
+E30    0.00  Moderado | ['Boa', 'Alta', 'Nenhuma', '15-35k', 'Estavel', 'Medio'] 
+E18    1.00  Moderado | ['Boa', 'Baixa', 'Nenhuma', '15-35k', 'Estavel', 'Medio'] 
+E13    2.00  Baixo    | ['Boa', 'Alta', 'Nenhuma', '>35k', 'Estavel', 'Alto'] 
+E22    2.00  Moderado | ['Boa', 'Baixa', 'Adequada', '15-35k', 'Estavel', 'Medio'] 
+E26    2.00  Alto     | ['Desconhecida', 'Alta', 'Nenhuma', '15-35k', 'Instavel', 'Medio'] 
+E3     2.00  Moderado | ['Desconhecida', 'Baixa', 'Nenhuma', '15-35k', 'Estavel', 'Medio'] 
+E10    3.00  Baixo    | ['Boa', 'Alta', 'Adequada', '>35k', 'Estavel', 'Alto'] 
+Votos (peso 1/(1+d)): {'Moderado': 1.0} => Moderado
+  => predição com k=1: Moderado
+
+=== k=3 (Hamming) ===
+
+Consulta: {'Historia_Credito': 'Boa', 'Divida': 'Alta', 'Garantia': 'Nenhuma', 'Renda': '15-35k', 'Emprego': 'Estavel', 'Patrimonio': 'Medio'}
+ID     dist  classe   | atributos
+E12    0.00  Moderado | ['Boa', 'Alta', 'Nenhuma', '15-35k', 'Estavel', 'Medio'] <-- vizinho
+E30    0.00  Moderado | ['Boa', 'Alta', 'Nenhuma', '15-35k', 'Estavel', 'Medio'] <-- vizinho
+E18    1.00  Moderado | ['Boa', 'Baixa', 'Nenhuma', '15-35k', 'Estavel', 'Medio'] <-- vizinho
+E13    2.00  Baixo    | ['Boa', 'Alta', 'Nenhuma', '>35k', 'Estavel', 'Alto'] 
+E22    2.00  Moderado | ['Boa', 'Baixa', 'Adequada', '15-35k', 'Estavel', 'Medio'] 
+E26    2.00  Alto     | ['Desconhecida', 'Alta', 'Nenhuma', '15-35k', 'Instavel', 'Medio'] 
+E3     2.00  Moderado | ['Desconhecida', 'Baixa', 'Nenhuma', '15-35k', 'Estavel', 'Medio'] 
+E10    3.00  Baixo    | ['Boa', 'Alta', 'Adequada', '>35k', 'Estavel', 'Alto'] 
+Votos (peso 1/(1+d)): {'Moderado': 2.5} => Moderado
+  => predição com k=3: Moderado
+
+=== k=5 (Hamming) ===
+
+Consulta: {'Historia_Credito': 'Boa', 'Divida': 'Alta', 'Garantia': 'Nenhuma', 'Renda': '15-35k', 'Emprego': 'Estavel', 'Patrimonio': 'Medio'}
+ID     dist  classe   | atributos
+E12    0.00  Moderado | ['Boa', 'Alta', 'Nenhuma', '15-35k', 'Estavel', 'Medio'] <-- vizinho
+E30    0.00  Moderado | ['Boa', 'Alta', 'Nenhuma', '15-35k', 'Estavel', 'Medio'] <-- vizinho
+E18    1.00  Moderado | ['Boa', 'Baixa', 'Nenhuma', '15-35k', 'Estavel', 'Medio'] <-- vizinho
+E13    2.00  Baixo    | ['Boa', 'Alta', 'Nenhuma', '>35k', 'Estavel', 'Alto'] <-- vizinho
+E22    2.00  Moderado | ['Boa', 'Baixa', 'Adequada', '15-35k', 'Estavel', 'Medio'] <-- vizinho
+E26    2.00  Alto     | ['Desconhecida', 'Alta', 'Nenhuma', '15-35k', 'Instavel', 'Medio'] 
+E3     2.00  Moderado | ['Desconhecida', 'Baixa', 'Nenhuma', '15-35k', 'Estavel', 'Medio'] 
+E10    3.00  Baixo    | ['Boa', 'Alta', 'Adequada', '>35k', 'Estavel', 'Alto'] 
+Votos (peso 1/(1+d)): {'Moderado': 2.833, 'Baixo': 0.333} => Moderado
+  => predição com k=5: Moderado
+
+=== Segundo caso, k=3 ===
+
+Consulta: {'Historia_Credito': 'Ruim', 'Divida': 'Baixa', 'Garantia': 'Adequada', 'Renda': '>35k', 'Emprego': 'Estavel', 'Patrimonio': 'Medio'}
+ID     dist  classe   | atributos
+E24    0.00  Moderado | ['Ruim', 'Baixa', 'Adequada', '>35k', 'Estavel', 'Medio'] <-- vizinho
+E8     0.00  Moderado | ['Ruim', 'Baixa', 'Adequada', '>35k', 'Estavel', 'Medio'] <-- vizinho
+E19    1.00  Baixo    | ['Boa', 'Baixa', 'Adequada', '>35k', 'Estavel', 'Medio'] <-- vizinho
+E15    2.00  Baixo    | ['Boa', 'Baixa', 'Adequada', '>35k', 'Estavel', 'Alto'] 
+E17    2.00  Moderado | ['Desconhecida', 'Baixa', 'Adequada', '15-35k', 'Estavel', 'Medio'] 
+E22    2.00  Moderado | ['Boa', 'Baixa', 'Adequada', '15-35k', 'Estavel', 'Medio'] 
+E29    2.00  Moderado | ['Desconhecida', 'Baixa', 'Adequada', '15-35k', 'Estavel', 'Medio'] 
+E6     2.00  Baixo    | ['Desconhecida', 'Baixa', 'Adequada', '>35k', 'Estavel', 'Alto'] 
+Votos (peso 1/(1+d)): {'Moderado': 2.0, 'Baixo': 0.5} => Moderado
+
+=== Terceiro caso (não existe na base): distâncias a TODAS as 30 instâncias ===
+  E22  d=1  Moderado
+  E17  d=2  Moderado
+  E18  d=2  Moderado
+  E19  d=2  Baixo
+  E29  d=2  Moderado
+  E12  d=3  Moderado
+  E15  d=3  Baixo
+  E24  d=3  Moderado
+  E26  d=3  Alto
+  E3   d=3  Moderado
+  E30  d=3  Moderado
+  E8   d=3  Moderado
+  E10  d=4  Baixo
+  E11  d=4  Alto
+  E14  d=4  Alto
+  E2   d=4  Alto
+  E20  d=4  Alto
+  E25  d=4  Baixo
+  E27  d=4  Baixo
+  E28  d=4  Alto
+  E4   d=4  Alto
+  E6   d=4  Baixo
+  E7   d=4  Alto
+  E9   d=4  Baixo
+  E1   d=5  Alto
+  E13  d=5  Baixo
+  E16  d=5  Alto
+  E21  d=5  Alto
+  E23  d=5  Baixo
+  E5   d=5  Baixo
+  k=1: Hamming -> Moderado | ponderado por ganho de informação -> Alto
+
+Consulta: {'Historia_Credito': 'Boa', 'Divida': 'Baixa', 'Garantia': 'Adequada', 'Renda': '15-35k', 'Emprego': 'Instavel', 'Patrimonio': 'Medio'}
+ID     dist  classe   | atributos
+E22    1.00  Moderado | ['Boa', 'Baixa', 'Adequada', '15-35k', 'Estavel', 'Medio'] <-- vizinho
+E17    2.00  Moderado | ['Desconhecida', 'Baixa', 'Adequada', '15-35k', 'Estavel', 'Medio'] <-- vizinho
+E18    2.00  Moderado | ['Boa', 'Baixa', 'Nenhuma', '15-35k', 'Estavel', 'Medio'] <-- vizinho
+E19    2.00  Baixo    | ['Boa', 'Baixa', 'Adequada', '>35k', 'Estavel', 'Medio'] 
+E29    2.00  Moderado | ['Desconhecida', 'Baixa', 'Adequada', '15-35k', 'Estavel', 'Medio'] 
+E12    3.00  Moderado | ['Boa', 'Alta', 'Nenhuma', '15-35k', 'Estavel', 'Medio'] 
+E15    3.00  Baixo    | ['Boa', 'Baixa', 'Adequada', '>35k', 'Estavel', 'Alto'] 
+E24    3.00  Moderado | ['Ruim', 'Baixa', 'Adequada', '>35k', 'Estavel', 'Medio'] 
+Votos (peso 1/(1+d)): {'Moderado': 1.167} => Moderado
+  k=3: Hamming -> Moderado | ponderado por ganho de informação -> Moderado
+  k=5: Hamming -> Moderado | ponderado por ganho de informação -> Moderado
+  k=7: Hamming -> Moderado | ponderado por ganho de informação -> Moderado
+  (pelas árvores da Lista 1 (ID3/C4.5/CART), Emprego=Instável => Alto: o KNN com Hamming simples DISCORDA, pois Emprego é só 1 de 6 atributos iguais)
+
+Acurácia Leave-One-Out
+  k   Hamming  Ponderado
+  1    100.0%      93.3%
+  3     96.7%      93.3%
+  5     96.7%      93.3%
+  7     96.7%      93.3%
+  9     96.7%      93.3%

@@ -1,0 +1,54 @@
+﻿USUÁRIO: Preciso preparar uma aula de Inteligência Artificial, corrigir trabalhos de alunos e participar de uma reunião de pesquisa. Tenho apenas quatro horas disponíveis hoje. A preparação da aula é urgente, mas a correção dos trabalhos precisa ser concluída até amanhã. Também preciso revisar um artigo, mas só na próxima semana. A reunião é às 16h. 
+
+1. Interpretação (LLM local/ollama:qwen2.5:7b): 3 tarefas extraídas.
+2. Verificação do esquema: OK.
+3. Planejador (busca exaustiva, utilidade esperada): utilidade=65.0.
+4. Validação do plano: OK
+
+Plano proposto:
+  14:00–16:00  Preparar aula de Inteligência Artificial — prazo hoje e prioridade Alta (valor 30); precisa ser concluída hoje
+  16:00–17:00  Participar de reunião de pesquisa — compromisso fixo informado (16:00–17:00); não pode ser movido
+  17:00–18:00  Corrigir trabalhos de alunos — prazo amanha e prioridade Média (valor 10 = 2.50 por bloco de 30 min); ocupa o tempo livre que sobrou depois das tarefas de prazo hoje (60 de 120 min hoje)
+Utilidade total = 65.0.
+Tarefas não concluídas hoje:
+  • B (Corrigir trabalhos de alunos): 60 de 120 min hoje; restantes 60 min ficam para amanhã (prazo: amanha).
+Contrafactual (sem divisão de tarefas): utilidade 60.0 (-5.0 vs. o plano escolhido).
+
+Pergunta: por que D?  -> Não há tarefa D neste pedido (tarefas: A, B, C).
+Pergunta: por que B?  -> Corrigir trabalhos de alunos foi alocada em 17:00–18:00 (prioridade Média, prazo amanha, valor 10).
+
+======================================================================
+Segundo cenário (outro pedido, outro horário de reunião)
+
+USUÁRIO: Preciso responder e-mails, preparar uma aula e participar de uma reunião às 15h. A aula é urgente. Também quero revisar um artigo, mas só na próxima semana. 
+
+1. Interpretação (LLM local/ollama:qwen2.5:7b): 3 tarefas extraídas.
+2. Verificação do esquema: OK.
+3. Planejador (busca exaustiva, utilidade esperada): utilidade=65.0.
+4. Validação do plano: OK
+
+Plano proposto:
+  14:00–15:00  Responder e-mails — prazo hoje e prioridade Alta (valor 30); precisa ser concluída hoje
+  15:00–16:00  Participar de uma reunião — compromisso fixo informado (15:00–16:00); não pode ser movido
+  16:00–18:00  Preparar uma aula — prazo hoje e prioridade Média (valor 15); precisa ser concluída hoje
+Utilidade total = 65.0.
+Contrafactual (sem divisão de tarefas): utilidade 65.0 (+0.0 vs. o plano escolhido).
+
+======================================================================
+Verificador em ação: uma saída ruim do 'LLM' é rejeitada
+
+['A: prioridade inválida', 'A: duração deve ser múltiplo de 30 min']
+
+Injeção de prompt (tratada como dado, não como instrução):
+1. Interpretação (LLM local/ollama:qwen2.5:7b): 3 tarefas extraídas.
+2. Verificação do esquema: OK.
+3. Planejador (busca exaustiva, utilidade esperada): utilidade=70.0.
+4. Validação do plano: OK
+Plano proposto:
+  14:00–16:00  Preparar aula — prazo hoje e prioridade Alta (valor 30); precisa ser concluída hoje
+  16:00–17:00  Reunião — compromisso fixo informado (16:00–17:00); não pode ser movido
+  17:00–18:00  Corrigir trabalhos — prazo amanha e prioridade Alta (valor 20 = 5.00 por bloco de 30 min); ocupa o tempo livre que sobrou depois das tarefas de prazo hoje (60 de 120 min hoje)
+Utilidade total = 70.0.
+Tarefas não concluídas hoje:
+  • B (Corrigir trabalhos): 60 de 120 min hoje; restantes 60 min ficam para amanhã (prazo: amanha).
+Contrafactual (sem divisão de tarefas): utilidade 60.0 (-10.0 vs. o plano escolhido).

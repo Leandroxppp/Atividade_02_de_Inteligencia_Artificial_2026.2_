@@ -1,0 +1,49 @@
+ELIZA: Como você está? Conte-me seu problema.
+
+USUÁRIO: Olá, estou muito cansado ultimamente.
+    [trace] sentença='estou muito cansado ultimamente' | chave='estou' (rank 3) | decomposição=/.*\bestou (.*)/ | grupo1='muito cansado ultimamente' -> refletido='muito cansado ultimamente' | remontagem #1
+ELIZA:   Há quanto tempo você está muito cansado ultimamente?
+
+USUÁRIO: Eu me sinto sozinho no trabalho.
+    [trace] sentença='eu me sinto sozinho no trabalho' | chave='me sinto' (rank 4) | decomposição=/.*me sinto (.*)/ | grupo1='sozinho no trabalho' -> refletido='sozinho no trabalho' | remontagem #1
+ELIZA:   Por que você se sente sozinho no trabalho?
+
+USUÁRIO: Meu chefe não me escuta.
+    [trace] sentença='meu chefe não me escuta' | chave='meu' (rank 2) | decomposição=/.*\b(?:meu|minha|meus|minhas) (.*)/ | grupo1='chefe não me escuta' -> refletido='chefe não você escuta' | remontagem #1
+ELIZA:   Por que você diz que seu chefe não você escuta?
+
+USUÁRIO: Eu odeio meu chefe
+    [trace] sentença='eu odeio meu chefe' | chave='meu' (rank 2) | decomposição=/.*\b(?:meu|minha|meus|minhas) (.*)/ | grupo1='chefe' -> refletido='chefe' | remontagem #2
+ELIZA:   Seu chefe é importante para você?
+
+USUÁRIO: Eu lembro da minha infância no interior.
+    [trace] sentença='eu lembro da minha infância no interior' | chave='lembro' (rank 5) | decomposição=/.*lembro (?:de |que )?(.*)/ | grupo1='da minha infância no interior' -> refletido='da sua infância no interior' | remontagem #1
+ELIZA:   Você costuma pensar em da sua infância no interior?
+
+USUÁRIO: Sonhei com minha mãe ontem.
+    [trace] sentença='sonhei com minha mãe ontem' | chave='mãe' (rank 5) | decomposição=/.*/ | grupo1='' -> refletido='' | remontagem #1
+ELIZA:   Fale mais sobre sua família.
+
+USUÁRIO: O tempo está bonito hoje.
+    [trace] sem palavra-chave -> usa MEMÓRIA
+ELIZA:   Antes você disse que meu chefe não me escuta. Isso tem a ver com o que você sente agora?
+
+USUÁRIO: Você é um robô?
+    [trace] sentença='você é um robô' | chave='você' (rank 1) | decomposição=/.*\bvocê (?:é |está )?(.*)/ | grupo1='um robô' -> refletido='um robô' | remontagem #1
+ELIZA:   Estamos falando de você, não de mim.
+
+USUÁRIO: Não estou triste, estou irritado.
+    [trace] sentença='não estou triste' | chave='estou' (rank 3) | decomposição=/.*\bestou (.*)/ | grupo1='triste' -> refletido='triste' | remontagem #2
+ELIZA:   Você veio aqui porque está triste?
+
+USUÁRIO: Não consigo dormir.
+    [trace] sentença='não consigo dormir' | chave='não consigo' (rank 3) | decomposição=/.*não consigo (.*)/ | grupo1='dormir' -> refletido='dormir' | remontagem #1
+ELIZA:   Você acha mesmo que não consegue dormir?
+
+USUÁRIO: Eu estou lendo sobre computador e IA.
+    [trace] sentença='eu estou lendo sobre computador e ia' | chave='computador' (rank 50) | decomposição=/.*/ | grupo1='' -> refletido='' | remontagem #1
+ELIZA:   Os computadores te preocupam?
+
+USUÁRIO: Qual é o sentido da vida?
+    [trace] sem palavra-chave -> usa MEMÓRIA
+ELIZA:   Antes você disse que eu odeio meu chefe. Isso tem a ver com o que você sente agora?

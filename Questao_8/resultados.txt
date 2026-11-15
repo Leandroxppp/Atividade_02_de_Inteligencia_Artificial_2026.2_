@@ -1,0 +1,29 @@
+A priori: P(Pneumonia)=0.0579
+
+=== Experimento 1: atualização sequencial ===
+Evidências acumuladas                                      P(Pneumonia|e)
+(nenhuma)                                                          0.0579
+Febre=Sim                                                          0.3430
+Febre=Sim, Tosse=Sim                                               0.7708
+Febre=Sim, Tosse=Sim, Dispneia=Sim                                 0.9792
+Febre=Sim, Tosse=Sim, Dispneia=Sim, RaioX=Sim                      0.9993
+
+=== Experimento 2: comparação de conjuntos de evidência (explaining away) ===
+Tosse=Sim                                                          0.2835
+Tosse=Sim, Fumante=Sim                                             0.2569
+Tosse=Sim, Fumante=Não                                             0.3163
+Febre=Sim, Tosse=Sim                                               0.7708
+Febre=Sim, Tosse=Sim, Fumante=Sim                                  0.7461
+
+=== Experimento 3: evidência negativa e fatores de risco (inferência causal/diagnóstica) ===
+Fumante=Sim, Contato=Sim                                           0.3000
+Fumante=Não, Contato=Não                                           0.0200
+Febre=Não, Tosse=Não, Dispneia=Não                                 0.0003
+RaioX=Sim                                                          0.6482
+RaioX=Não, Febre=Sim, Tosse=Sim                                    0.2574
+
+=== Predição de sintomas dado diagnóstico ===
+Pneumonia=Sim {'Febre': 0.85, 'Tosse': 0.924, 'Dispneia': 0.7, 'RaioX': 0.9}
+Pneumonia=Não {'Febre': 0.1, 'Tosse': 0.144, 'Dispneia': 0.05, 'RaioX': 0.03}
+
+Febre⟂Tosse|Pneumonia? P(F|P,T)=0.8500 = P(F|P)=0.8500;  mas sem P: P(F|T)=0.3126 ≠ P(F)=0.1434

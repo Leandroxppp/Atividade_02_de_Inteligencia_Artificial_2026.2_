@@ -1,0 +1,5 @@
+Cliente A: risco(skfuzzy, centroide) = 14.8  | NumPy: 15.0
+Cliente B: risco(skfuzzy, centroide) = 50.0  | NumPy: 50.0
+Cliente C: risco(skfuzzy, centroide) = 86.8  | NumPy: 86.7
+Cliente D: risco(skfuzzy, centroide) = 50.0  | NumPy: 50.0
+Cliente E: risco(skfuzzy, centroide) = 33.3  | NumPy: 33.4

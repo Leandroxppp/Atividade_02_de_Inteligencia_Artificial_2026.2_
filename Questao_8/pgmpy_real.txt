@@ -1,0 +1,7 @@
+{}                                                                          pgmpy=0.0579  enumeração=0.0579  OK
+{'Febre': 'Sim'}                                                            pgmpy=0.3430  enumeração=0.3430  OK
+{'Febre': 'Sim', 'Tosse': 'Sim'}                                            pgmpy=0.7708  enumeração=0.7708  OK
+{'Febre': 'Sim', 'Tosse': 'Sim', 'Dispneia': 'Sim'}                         pgmpy=0.9792  enumeração=0.9792  OK
+{'Febre': 'Sim', 'Tosse': 'Sim', 'Dispneia': 'Sim', 'RaioX': 'Sim'}         pgmpy=0.9993  enumeração=0.9993  OK
+{'Tosse': 'Sim', 'Fumante': 'Sim'}                                          pgmpy=0.2569  enumeração=0.2569  OK
+{'RaioX': 'Nao', 'Febre': 'Sim', 'Tosse': 'Sim'}                            pgmpy=0.2574  enumeração=0.2574  OK

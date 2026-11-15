@@ -1,0 +1,55 @@
+
+=== Cliente A (renda alta, pouco endividado, bom histórico): renda=32k, comprometimento=12%, histórico=9
+Fuzzificação:
+  renda: {'baixa': 0.0, 'media': 0.17, 'alta': 0.57}
+  comp: {'baixo': 1.0, 'medio': 0.0, 'alto': 0.0}
+  hist: {'ruim': 0.0, 'regular': 0.0, 'bom': 1.0}
+Regras ativadas (força = min dos antecedentes):
+  R1  SE renda=alta E comp=qualquer E hist=bom ENTÃO risco=baixo  -> w=0.57
+  R2  SE renda=alta E comp=baixo E hist=qualquer ENTÃO risco=baixo  -> w=0.57
+  R3  SE renda=media E comp=baixo E hist=bom ENTÃO risco=baixo  -> w=0.17
+Defuzzificação (centroide): risco = 15.0 -> BAIXO
+  Outros defuzzificadores: bisetriz=15.0 | média dos máximos=12.0
+
+=== Cliente B (renda média, endividamento médio, histórico regular): renda=20k, comprometimento=45%, histórico=5
+Fuzzificação:
+  renda: {'baixa': 0.0, 'media': 0.83, 'alta': 0.0}
+  comp: {'baixo': 0.0, 'medio': 1.0, 'alto': 0.0}
+  hist: {'ruim': 0.0, 'regular': 0.8, 'bom': 0.0}
+Regras ativadas (força = min dos antecedentes):
+  R4  SE renda=media E comp=medio E hist=regular ENTÃO risco=moderado  -> w=0.80
+Defuzzificação (centroide): risco = 50.0 -> MODERADO
+  Outros defuzzificadores: bisetriz=50.0 | média dos máximos=50.0
+
+=== Cliente C (renda baixa, muito endividado, histórico ruim): renda=6k, comprometimento=80%, histórico=1.5
+Fuzzificação:
+  renda: {'baixa': 1.0, 'media': 0.0, 'alta': 0.0}
+  comp: {'baixo': 0.0, 'medio': 0.0, 'alto': 1.0}
+  hist: {'ruim': 1.0, 'regular': 0.0, 'bom': 0.0}
+Regras ativadas (força = min dos antecedentes):
+  R12 SE renda=baixa E comp=alto E hist=qualquer ENTÃO risco=alto  -> w=1.00
+  R13 SE renda=baixa E comp=qualquer E hist=ruim ENTÃO risco=alto  -> w=1.00
+  R14 SE renda=qualquer E comp=qualquer E hist=ruim ENTÃO risco=alto  -> w=1.00
+Defuzzificação (centroide): risco = 86.7 -> ALTO
+  Outros defuzzificadores: bisetriz=87.5 | média dos máximos=92.2
+
+=== Cliente D (renda média, endividamento alto, bom histórico): renda=22k, comprometimento=70%, histórico=8
+Fuzzificação:
+  renda: {'baixa': 0.0, 'media': 1.0, 'alta': 0.0}
+  comp: {'baixo': 0.0, 'medio': 0.0, 'alto': 0.75}
+  hist: {'ruim': 0.0, 'regular': 0.0, 'bom': 0.75}
+Regras ativadas (força = min dos antecedentes):
+  R10 SE renda=media E comp=alto E hist=bom ENTÃO risco=moderado  -> w=0.75
+Defuzzificação (centroide): risco = 50.0 -> MODERADO
+  Outros defuzzificadores: bisetriz=50.0 | média dos máximos=50.0
+
+=== Cliente E (renda alta, endividamento alto, bom histórico): renda=36k, comprometimento=70%, histórico=8
+Fuzzificação:
+  renda: {'baixa': 0.0, 'media': 0.0, 'alta': 1.0}
+  comp: {'baixo': 0.0, 'medio': 0.0, 'alto': 0.75}
+  hist: {'ruim': 0.0, 'regular': 0.0, 'bom': 0.75}
+Regras ativadas (força = min dos antecedentes):
+  R1  SE renda=alta E comp=qualquer E hist=bom ENTÃO risco=baixo  -> w=0.75
+  R11 SE renda=alta E comp=alto E hist=bom ENTÃO risco=moderado  -> w=0.75
+Defuzzificação (centroide): risco = 33.4 -> MODERADO
+  Outros defuzzificadores: bisetriz=35.0 | média dos máximos=25.5

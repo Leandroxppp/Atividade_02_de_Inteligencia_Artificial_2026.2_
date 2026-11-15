@@ -1,0 +1,10 @@
+﻿c.nome
+"Arbovirose"
+"DoencaInfecciosa"
+doenca, sintomas_em_comum, quais
+"Dengue", 3, ["DorOcular", "Manchas", "Febre"]
+"Chikungunya", 2, ["Manchas", "Febre"]
+"Zika", 2, ["Manchas", "Febre"]
+"Gripe", 1, ["Febre"]
+p.nome, medicamento, possivel_doenca
+"Paciente1", "Ibuprofeno", "Dengue"

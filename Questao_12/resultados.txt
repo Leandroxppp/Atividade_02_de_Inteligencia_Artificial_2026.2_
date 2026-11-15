@@ -1,0 +1,58 @@
+USUÁRIO: Preciso preparar uma aula de Inteligência Artificial, corrigir trabalhos de alunos e participar de uma reunião de pesquisa. Tenho apenas quatro horas disponíveis hoje. A preparação da aula é urgente, mas a correção dos trabalhos precisa ser concluída até amanhã. Também preciso revisar um artigo, mas só na próxima semana. A reunião é às 16h. 
+
+1. Interpretação (HEURÍSTICA (simulado)): 4 tarefas extraídas.
+2. Verificação do esquema: OK.
+3. Planejador (busca exaustiva, utilidade esperada): utilidade=67.5.
+4. Validação do plano: OK
+
+Plano proposto:
+  14:00–15:30  Preparar aula — prazo hoje e prioridade Alta (valor 30); precisa ser concluída hoje
+  15:30–16:00  Corrigir trabalhos — prazo amanha e prioridade Média (valor 10 = 2.50 por bloco de 30 min); ocupa o tempo livre que sobrou depois das tarefas de prazo hoje (90 de 120 min hoje)
+  16:00–17:00  Reunião de pesquisa — compromisso fixo informado (16:00–17:00); não pode ser movido
+  17:00–18:00  Corrigir trabalhos — prazo amanha e prioridade Média (valor 10 = 2.50 por bloco de 30 min); ocupa o tempo livre que sobrou depois das tarefas de prazo hoje (90 de 120 min hoje)
+Utilidade total = 67.5.
+Tarefas não concluídas hoje:
+  • B (Corrigir trabalhos): 90 de 120 min hoje; restantes 30 min ficam para amanhã (prazo: amanha).
+  • D (Revisar artigo): adiado — prioridade Baixa e prazo na próxima semana; todo o tempo útil de hoje foi usado em tarefas com prazo mais curto.
+Contrafactual (sem divisão de tarefas): utilidade 62.0 (-5.5 vs. o plano escolhido).
+
+Pergunta: por que D?  -> Revisar artigo ficou de fora hoje: prioridade Baixa, prazo semana (valor 2). O tempo útil foi usado por tarefas de maior valor por bloco; incluí-la hoje exigiria remover outra com prazo mais curto.
+Pergunta: por que B?  -> Corrigir trabalhos foi alocada em 15:30–16:00, 17:00–18:00 (prioridade Média, prazo amanha, valor 10).
+
+======================================================================
+Segundo cenário (outro pedido, outro horário de reunião)
+
+USUÁRIO: Preciso responder e-mails, preparar uma aula e participar de uma reunião às 15h. A aula é urgente. Também quero revisar um artigo, mas só na próxima semana. 
+
+1. Interpretação (HEURÍSTICA (simulado)): 4 tarefas extraídas.
+2. Verificação do esquema: OK.
+3. Planejador (busca exaustiva, utilidade esperada): utilidade=68.0.
+4. Validação do plano: OK
+
+Plano proposto:
+  14:00–15:00  Revisar artigo — prazo semana e prioridade Baixa (valor 2 = 1.00 por bloco de 30 min); ocupa o tempo livre que sobrou depois das tarefas de prazo hoje (60 de 60 min hoje)
+  15:00–16:00  Reunião de pesquisa — compromisso fixo informado (15:00–16:00); não pode ser movido
+  16:00–16:30  Responder e-mails — prazo hoje e prioridade Baixa (valor 6); precisa ser concluída hoje
+  16:30–18:00  Preparar aula — prazo hoje e prioridade Alta (valor 30); precisa ser concluída hoje
+Utilidade total = 68.0.
+Contrafactual (sem divisão de tarefas): utilidade 68.0 (+0.0 vs. o plano escolhido).
+
+======================================================================
+Verificador em ação: uma saída ruim do 'LLM' é rejeitada
+
+['A: prioridade inválida', 'A: duração deve ser múltiplo de 30 min']
+
+Injeção de prompt (tratada como dado, não como instrução):
+1. Interpretação (HEURÍSTICA (simulado)): 3 tarefas extraídas.
+2. Verificação do esquema: OK.
+3. Planejador (busca exaustiva, utilidade esperada): utilidade=67.5.
+4. Validação do plano: OK
+Plano proposto:
+  14:00–15:30  Preparar aula — prazo hoje e prioridade Alta (valor 30); precisa ser concluída hoje
+  15:30–16:00  Corrigir trabalhos — prazo amanha e prioridade Média (valor 10 = 2.50 por bloco de 30 min); ocupa o tempo livre que sobrou depois das tarefas de prazo hoje (90 de 120 min hoje)
+  16:00–17:00  Reunião de pesquisa — compromisso fixo informado (16:00–17:00); não pode ser movido
+  17:00–18:00  Corrigir trabalhos — prazo amanha e prioridade Média (valor 10 = 2.50 por bloco de 30 min); ocupa o tempo livre que sobrou depois das tarefas de prazo hoje (90 de 120 min hoje)
+Utilidade total = 67.5.
+Tarefas não concluídas hoje:
+  • B (Corrigir trabalhos): 90 de 120 min hoje; restantes 30 min ficam para amanhã (prazo: amanha).
+Contrafactual (sem divisão de tarefas): utilidade 60.0 (-7.5 vs. o plano escolhido).

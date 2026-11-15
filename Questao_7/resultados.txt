@@ -1,0 +1,56 @@
+Base: 18 casos, 6 doenças
+
+Sintomas informados: febre_alta, dor_atras_dos_olhos, dor_muscular, manchas_na_pele | idade=30 | dias=3
+RETRIEVE — 3 casos mais semelhantes:
+  C01 sim=0.837  Dengue             sintomas=febre_alta,dor_atras_dos_olhos,dor_muscular,manchas_na_pele,dor_de_cabeca
+  C02 sim=0.546  Dengue             sintomas=febre_alta,dor_muscular,dor_de_cabeca,nausea,manchas_na_pele
+  C03 sim=0.419  Dengue             sintomas=febre,dor_atras_dos_olhos,dor_muscular,fadiga
+REUSE — diagnóstico sugerido: Dengue (confiança relativa 100%); ranking: Dengue=1.18
+        tratamento associado: Hidratação oral abundante, paracetamol (evitar AINEs/AAS), acompanhamento e hemograma; retorno imediato se sinais de alarme
+
+Sintomas informados: febre, tosse_seca, perda_olfato_paladar, fadiga | idade=40 | dias=4
+RETRIEVE — 3 casos mais semelhantes:
+  C04 sim=0.832  COVID-19           sintomas=febre,tosse_seca,perda_olfato_paladar,fadiga,dor_de_cabeca
+  C06 sim=0.493  COVID-19           sintomas=febre,tosse,falta_de_ar,perda_olfato_paladar,fadiga
+  C05 sim=0.451  COVID-19           sintomas=tosse_seca,perda_olfato_paladar,dor_de_garganta,dor_muscular
+REUSE — diagnóstico sugerido: COVID-19 (confiança relativa 100%); ranking: COVID-19=1.14
+        tratamento associado: Repouso, hidratação, sintomáticos; isolamento; avaliar antiviral conforme risco; procurar serviço se falta de ar
+
+Sintomas informados: coriza, espirros, coceira_nos_olhos | idade=22 | dias=7
+RETRIEVE — 3 casos mais semelhantes:
+  C18 sim=0.933  Rinite alérgica    sintomas=espirros,coceira_nos_olhos,coriza
+  C17 sim=0.777  Rinite alérgica    sintomas=espirros,coriza,coceira_nos_olhos,dor_de_cabeca
+  C16 sim=0.742  Rinite alérgica    sintomas=coriza,espirros,coceira_nos_olhos,tosse
+REUSE — diagnóstico sugerido: Rinite alérgica (confiança relativa 100%); ranking: Rinite alérgica=2.03
+        tratamento associado: Evitar alérgenos, anti-histamínico e lavagem nasal; corticoide nasal se persistente
+
+Sintomas informados: febre, tosse, dor_de_cabeca | idade=35 | dias=2
+RETRIEVE — 3 casos mais semelhantes:
+  C04 sim=0.374  COVID-19           sintomas=febre,tosse_seca,perda_olfato_paladar,fadiga,dor_de_cabeca
+  C06 sim=0.361  COVID-19           sintomas=febre,tosse,falta_de_ar,perda_olfato_paladar,fadiga
+  C07 sim=0.357  Gripe              sintomas=febre,dor_muscular,calafrios,dor_de_cabeca,tosse_seca,dor_de_garganta
+REUSE — diagnóstico sugerido: COVID-19 (confiança relativa 68%); ranking: COVID-19=0.27, Gripe=0.13
+        tratamento associado: Repouso, hidratação, sintomáticos; isolamento; avaliar antiviral conforme risco; procurar serviço se falta de ar
+
+--- Ciclo Revise/Retain no caso ambíguo ---
+
+Sintomas informados: febre, tosse, dor_de_cabeca | idade=35 | dias=2
+RETRIEVE — 3 casos mais semelhantes:
+  C04 sim=0.374  COVID-19           sintomas=febre,tosse_seca,perda_olfato_paladar,fadiga,dor_de_cabeca
+  C06 sim=0.361  COVID-19           sintomas=febre,tosse,falta_de_ar,perda_olfato_paladar,fadiga
+  C07 sim=0.357  Gripe              sintomas=febre,dor_muscular,calafrios,dor_de_cabeca,tosse_seca,dor_de_garganta
+REUSE — diagnóstico sugerido: COVID-19 (confiança relativa 68%); ranking: COVID-19=0.27, Gripe=0.13
+        tratamento associado: Repouso, hidratação, sintomáticos; isolamento; avaliar antiviral conforme risco; procurar serviço se falta de ar
+REVISE — médico corrige o diagnóstico para 'Gripe' após exame clínico.
+RETAIN — caso C19 salvo (base agora com 19 casos).
+Reconsulta após aprendizado:
+
+Sintomas informados: febre, tosse, dor_de_cabeca | idade=35 | dias=2
+RETRIEVE — 3 casos mais semelhantes:
+  C19 sim=1.000  Gripe              sintomas=febre,tosse,dor_de_cabeca
+  C04 sim=0.367  COVID-19           sintomas=febre,tosse_seca,perda_olfato_paladar,fadiga,dor_de_cabeca
+  C06 sim=0.350  COVID-19           sintomas=febre,tosse,falta_de_ar,perda_olfato_paladar,fadiga
+REUSE — diagnóstico sugerido: Gripe (confiança relativa 79%); ranking: Gripe=1.00, COVID-19=0.26
+        tratamento associado: Repouso, hidratação e antitérmico
+
+Leave-one-out nos 18 casos originais: 12/18 = 67%

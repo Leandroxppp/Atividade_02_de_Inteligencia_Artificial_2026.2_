@@ -1,0 +1,57 @@
+Admissibilidade/consistência de h:
+  h*(n): {'A': 13, 'B': 9, 'C': 6, 'D': 11, 'E': 7, 'F': 4, 'G': 5, 'H': 2, 'I': 0}
+  admissível: True
+  violações de consistência h(n)<=c(n,m)+h(m): []
+
+BFS : expansão=['A', 'B', 'D', 'C', 'E', 'G', 'F', 'H', 'I']
+      rota=A-B-C-F-I custo=15
+DFS : expansão=['A', 'B', 'C', 'F', 'E', 'D', 'G', 'H', 'I']
+      rota=A-B-C-F-E-D-G-H-I custo=29
+
+UCS:
+  expande A  g=0
+  expande D  g=3
+  expande B  g=4
+  expande E  g=6
+  expande C  g=9
+  expande F  g=9
+  expande G  g=9
+  expande H  g=11
+  expande I  g=13
+  rota=A-B-E-F-I custo=13 nós expandidos=9
+
+A*:
+  expande A: g= 0 h=10 f=10
+      fronteira (n:g+h=f): D:3+9=12, B:4+8=12
+  expande D: g= 3 h= 9 f=12
+      fronteira (n:g+h=f): B:4+8=12, E:7+6=13, G:9+5=14
+  expande B: g= 4 h= 8 f=12
+      fronteira (n:g+h=f): E:6+6=12, E:7+6=13, G:9+5=14, C:9+6=15
+  expande E: g= 6 h= 6 f=12
+      fronteira (n:g+h=f): F:9+4=13, H:11+2=13, G:9+5=14, C:9+6=15
+  expande F: g= 9 h= 4 f=13
+      fronteira (n:g+h=f): H:11+2=13, I:13+0=13, G:9+5=14, C:9+6=15, C:11+6=17
+  expande H: g=11 h= 2 f=13
+      fronteira (n:g+h=f): I:13+0=13, I:13+0=13, G:9+5=14, C:9+6=15, C:11+6=17, G:14+5=19
+  expande I: g=13 h= 0 f=13
+  rota=A-B-E-F-I custo=13 nós expandidos=7
+
+Versão com D e F obrigatórios (UCS no espaço estendido):
+  rota=A-D-E-F-I custo=14 estados expandidos=24
+
+A* no espaço estendido (estado = (local, {obrigatórios visitados})):
+  expande (A,{}) g=0 h=10 f=10
+  expande (D,{D}) g=3 h=9 f=12
+  expande (B,{}) g=4 h=8 f=12
+  expande (E,{}) g=6 h=6 f=12
+  expande (E,{D}) g=7 h=6 f=13
+  expande (F,{F}) g=9 h=4 f=13
+  expande (H,{}) g=11 h=2 f=13
+  expande (I,{}) g=13 h=0 f=13
+  expande (I,{F}) g=13 h=0 f=13
+  expande (G,{D}) g=9 h=5 f=14
+  expande (F,{D,F}) g=10 h=4 f=14
+  expande (H,{D}) g=12 h=2 f=14
+  expande (I,{D}) g=14 h=0 f=14
+  expande (I,{D,F}) g=14 h=0 f=14
+  A* c/ h(local): rota=A-D-E-F-I custo=14 estados expandidos=14

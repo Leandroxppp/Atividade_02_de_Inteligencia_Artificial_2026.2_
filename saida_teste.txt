@@ -1,0 +1,800 @@
+﻿
+===== Questao_2 : knn.py =====
+Pesos (ganho de informação): {'Historia_Credito': 0.328, 'Divida': 0.154, 'Garantia': 0.288, 'Renda': 0.973, 'Emprego': 0.948, 'Patrimonio': 1.263}
+
+=== k=1 (Hamming) ===
+
+Consulta: {'Historia_Credito': 'Boa', 'Divida': 'Alta', 'Garantia': 'Nenhuma', 'Renda': '15-35k', 'Emprego': 'Estavel', 'Patrimonio': 'Medio'}
+ID     dist  classe   | atributos
+E12    0.00  Moderado | ['Boa', 'Alta', 'Nenhuma', '15-35k', 'Estavel', 'Medio'] <-- vizinho
+E30    0.00  Moderado | ['Boa', 'Alta', 'Nenhuma', '15-35k', 'Estavel', 'Medio'] 
+E18    1.00  Moderado | ['Boa', 'Baixa', 'Nenhuma', '15-35k', 'Estavel', 'Medio'] 
+E13    2.00  Baixo    | ['Boa', 'Alta', 'Nenhuma', '>35k', 'Estavel', 'Alto'] 
+E22    2.00  Moderado | ['Boa', 'Baixa', 'Adequada', '15-35k', 'Estavel', 'Medio'] 
+E26    2.00  Alto     | ['Desconhecida', 'Alta', 'Nenhuma', '15-35k', 'Instavel', 'Medio'] 
+E3     2.00  Moderado | ['Desconhecida', 'Baixa', 'Nenhuma', '15-35k', 'Estavel', 'Medio'] 
+E10    3.00  Baixo    | ['Boa', 'Alta', 'Adequada', '>35k', 'Estavel', 'Alto'] 
+Votos (peso 1/(1+d)): {'Moderado': 1.0} => Moderado
+  => predição com k=1: Moderado
+
+=== k=3 (Hamming) ===
+
+Consulta: {'Historia_Credito': 'Boa', 'Divida': 'Alta', 'Garantia': 'Nenhuma', 'Renda': '15-35k', 'Emprego': 'Estavel', 'Patrimonio': 'Medio'}
+ID     dist  classe   | atributos
+E12    0.00  Moderado | ['Boa', 'Alta', 'Nenhuma', '15-35k', 'Estavel', 'Medio'] <-- vizinho
+E30    0.00  Moderado | ['Boa', 'Alta', 'Nenhuma', '15-35k', 'Estavel', 'Medio'] <-- vizinho
+E18    1.00  Moderado | ['Boa', 'Baixa', 'Nenhuma', '15-35k', 'Estavel', 'Medio'] <-- vizinho
+E13    2.00  Baixo    | ['Boa', 'Alta', 'Nenhuma', '>35k', 'Estavel', 'Alto'] 
+E22    2.00  Moderado | ['Boa', 'Baixa', 'Adequada', '15-35k', 'Estavel', 'Medio'] 
+E26    2.00  Alto     | ['Desconhecida', 'Alta', 'Nenhuma', '15-35k', 'Instavel', 'Medio'] 
+E3     2.00  Moderado | ['Desconhecida', 'Baixa', 'Nenhuma', '15-35k', 'Estavel', 'Medio'] 
+E10    3.00  Baixo    | ['Boa', 'Alta', 'Adequada', '>35k', 'Estavel', 'Alto'] 
+Votos (peso 1/(1+d)): {'Moderado': 2.5} => Moderado
+  => predição com k=3: Moderado
+
+=== k=5 (Hamming) ===
+
+Consulta: {'Historia_Credito': 'Boa', 'Divida': 'Alta', 'Garantia': 'Nenhuma', 'Renda': '15-35k', 'Emprego': 'Estavel', 'Patrimonio': 'Medio'}
+ID     dist  classe   | atributos
+E12    0.00  Moderado | ['Boa', 'Alta', 'Nenhuma', '15-35k', 'Estavel', 'Medio'] <-- vizinho
+E30    0.00  Moderado | ['Boa', 'Alta', 'Nenhuma', '15-35k', 'Estavel', 'Medio'] <-- vizinho
+E18    1.00  Moderado | ['Boa', 'Baixa', 'Nenhuma', '15-35k', 'Estavel', 'Medio'] <-- vizinho
+E13    2.00  Baixo    | ['Boa', 'Alta', 'Nenhuma', '>35k', 'Estavel', 'Alto'] <-- vizinho
+E22    2.00  Moderado | ['Boa', 'Baixa', 'Adequada', '15-35k', 'Estavel', 'Medio'] <-- vizinho
+E26    2.00  Alto     | ['Desconhecida', 'Alta', 'Nenhuma', '15-35k', 'Instavel', 'Medio'] 
+E3     2.00  Moderado | ['Desconhecida', 'Baixa', 'Nenhuma', '15-35k', 'Estavel', 'Medio'] 
+E10    3.00  Baixo    | ['Boa', 'Alta', 'Adequada', '>35k', 'Estavel', 'Alto'] 
+Votos (peso 1/(1+d)): {'Moderado': 2.833, 'Baixo': 0.333} => Moderado
+  => predição com k=5: Moderado
+
+=== Segundo caso, k=3 ===
+
+Consulta: {'Historia_Credito': 'Ruim', 'Divida': 'Baixa', 'Garantia': 'Adequada', 'Renda': '>35k', 'Emprego': 'Estavel', 'Patrimonio': 'Medio'}
+ID     dist  classe   | atributos
+E24    0.00  Moderado | ['Ruim', 'Baixa', 'Adequada', '>35k', 'Estavel', 'Medio'] <-- vizinho
+E8     0.00  Moderado | ['Ruim', 'Baixa', 'Adequada', '>35k', 'Estavel', 'Medio'] <-- vizinho
+E19    1.00  Baixo    | ['Boa', 'Baixa', 'Adequada', '>35k', 'Estavel', 'Medio'] <-- vizinho
+E15    2.00  Baixo    | ['Boa', 'Baixa', 'Adequada', '>35k', 'Estavel', 'Alto'] 
+E17    2.00  Moderado | ['Desconhecida', 'Baixa', 'Adequada', '15-35k', 'Estavel', 'Medio'] 
+E22    2.00  Moderado | ['Boa', 'Baixa', 'Adequada', '15-35k', 'Estavel', 'Medio'] 
+E29    2.00  Moderado | ['Desconhecida', 'Baixa', 'Adequada', '15-35k', 'Estavel', 'Medio'] 
+E6     2.00  Baixo    | ['Desconhecida', 'Baixa', 'Adequada', '>35k', 'Estavel', 'Alto'] 
+Votos (peso 1/(1+d)): {'Moderado': 2.0, 'Baixo': 0.5} => Moderado
+
+=== Terceiro caso (não existe na base): distâncias a TODAS as 30 instâncias ===
+  E22  d=1  Moderado
+  E17  d=2  Moderado
+  E18  d=2  Moderado
+  E19  d=2  Baixo
+  E29  d=2  Moderado
+  E12  d=3  Moderado
+  E15  d=3  Baixo
+  E24  d=3  Moderado
+  E26  d=3  Alto
+  E3   d=3  Moderado
+  E30  d=3  Moderado
+  E8   d=3  Moderado
+  E10  d=4  Baixo
+  E11  d=4  Alto
+  E14  d=4  Alto
+  E2   d=4  Alto
+  E20  d=4  Alto
+  E25  d=4  Baixo
+  E27  d=4  Baixo
+  E28  d=4  Alto
+  E4   d=4  Alto
+  E6   d=4  Baixo
+  E7   d=4  Alto
+  E9   d=4  Baixo
+  E1   d=5  Alto
+  E13  d=5  Baixo
+  E16  d=5  Alto
+  E21  d=5  Alto
+  E23  d=5  Baixo
+  E5   d=5  Baixo
+  k=1: Hamming -> Moderado | ponderado por ganho de informação -> Alto
+
+Consulta: {'Historia_Credito': 'Boa', 'Divida': 'Baixa', 'Garantia': 'Adequada', 'Renda': '15-35k', 'Emprego': 'Instavel', 'Patrimonio': 'Medio'}
+ID     dist  classe   | atributos
+E22    1.00  Moderado | ['Boa', 'Baixa', 'Adequada', '15-35k', 'Estavel', 'Medio'] <-- vizinho
+E17    2.00  Moderado | ['Desconhecida', 'Baixa', 'Adequada', '15-35k', 'Estavel', 'Medio'] <-- vizinho
+E18    2.00  Moderado | ['Boa', 'Baixa', 'Nenhuma', '15-35k', 'Estavel', 'Medio'] <-- vizinho
+E19    2.00  Baixo    | ['Boa', 'Baixa', 'Adequada', '>35k', 'Estavel', 'Medio'] 
+E29    2.00  Moderado | ['Desconhecida', 'Baixa', 'Adequada', '15-35k', 'Estavel', 'Medio'] 
+E12    3.00  Moderado | ['Boa', 'Alta', 'Nenhuma', '15-35k', 'Estavel', 'Medio'] 
+E15    3.00  Baixo    | ['Boa', 'Baixa', 'Adequada', '>35k', 'Estavel', 'Alto'] 
+E24    3.00  Moderado | ['Ruim', 'Baixa', 'Adequada', '>35k', 'Estavel', 'Medio'] 
+Votos (peso 1/(1+d)): {'Moderado': 1.167} => Moderado
+  k=3: Hamming -> Moderado | ponderado por ganho de informação -> Moderado
+  k=5: Hamming -> Moderado | ponderado por ganho de informação -> Moderado
+  k=7: Hamming -> Moderado | ponderado por ganho de informação -> Moderado
+  (pelas árvores da Lista 1 (ID3/C4.5/CART), Emprego=Instável => Alto: o KNN com Hamming simples DISCORDA, pois Emprego é só 1 de 6 atributos iguais)
+
+Acurácia Leave-One-Out
+  k   Hamming  Ponderado
+  1    100.0%      93.3%
+  3     96.7%      93.3%
+  5     96.7%      93.3%
+  7     96.7%      93.3%
+  9     96.7%      93.3%
+
+===== Questao_3 : eliza.py --demo =====
+ELIZA: Como você está? Conte-me seu problema.
+
+USUÁRIO: Olá, estou muito cansado ultimamente.
+    [trace] sentença='estou muito cansado ultimamente' | chave='estou' (rank 3) | decomposição=/.*\bestou (.*)/ | grupo1='muito cansado ultimamente' -> refletido='muito cansado ultimamente' | remontagem #1
+ELIZA:   Há quanto tempo você está muito cansado ultimamente?
+
+USUÁRIO: Eu me sinto sozinho no trabalho.
+    [trace] sentença='eu me sinto sozinho no trabalho' | chave='me sinto' (rank 4) | decomposição=/.*me sinto (.*)/ | grupo1='sozinho no trabalho' -> refletido='sozinho no trabalho' | remontagem #1
+ELIZA:   Por que você se sente sozinho no trabalho?
+
+USUÁRIO: Meu chefe não me escuta.
+    [trace] sentença='meu chefe não me escuta' | chave='meu' (rank 2) | decomposição=/.*\b(?:meu|minha|meus|minhas) (.*)/ | grupo1='chefe não me escuta' -> refletido='chefe não você escuta' | remontagem #1
+ELIZA:   Por que você diz que seu chefe não você escuta?
+
+USUÁRIO: Eu odeio meu chefe
+    [trace] sentença='eu odeio meu chefe' | chave='meu' (rank 2) | decomposição=/.*\b(?:meu|minha|meus|minhas) (.*)/ | grupo1='chefe' -> refletido='chefe' | remontagem #2
+ELIZA:   Seu chefe é importante para você?
+
+USUÁRIO: Eu lembro da minha infância no interior.
+    [trace] sentença='eu lembro da minha infância no interior' | chave='lembro' (rank 5) | decomposição=/.*lembro (?:de |que )?(.*)/ | grupo1='da minha infância no interior' -> refletido='da sua infância no interior' | remontagem #1
+ELIZA:   Você costuma pensar em da sua infância no interior?
+
+USUÁRIO: Sonhei com minha mãe ontem.
+    [trace] sentença='sonhei com minha mãe ontem' | chave='mãe' (rank 5) | decomposição=/.*/ | grupo1='' -> refletido='' | remontagem #1
+ELIZA:   Fale mais sobre sua família.
+
+USUÁRIO: O tempo está bonito hoje.
+    [trace] sem palavra-chave -> usa MEMÓRIA
+ELIZA:   Antes você disse que meu chefe não me escuta. Isso tem a ver com o que você sente agora?
+
+USUÁRIO: Você é um robô?
+    [trace] sentença='você é um robô' | chave='você' (rank 1) | decomposição=/.*\bvocê (?:é |está )?(.*)/ | grupo1='um robô' -> refletido='um robô' | remontagem #1
+ELIZA:   Estamos falando de você, não de mim.
+
+USUÁRIO: Não estou triste, estou irritado.
+    [trace] sentença='não estou triste' | chave='estou' (rank 3) | decomposição=/.*\bestou (.*)/ | grupo1='triste' -> refletido='triste' | remontagem #2
+ELIZA:   Você veio aqui porque está triste?
+
+USUÁRIO: Não consigo dormir.
+    [trace] sentença='não consigo dormir' | chave='não consigo' (rank 3) | decomposição=/.*não consigo (.*)/ | grupo1='dormir' -> refletido='dormir' | remontagem #1
+ELIZA:   Você acha mesmo que não consegue dormir?
+
+USUÁRIO: Eu estou lendo sobre computador e IA.
+    [trace] sentença='eu estou lendo sobre computador e ia' | chave='computador' (rank 50) | decomposição=/.*/ | grupo1='' -> refletido='' | remontagem #1
+ELIZA:   Os computadores te preocupam?
+
+USUÁRIO: Qual é o sentido da vida?
+    [trace] sem palavra-chave -> usa MEMÓRIA
+ELIZA:   Antes você disse que eu odeio meu chefe. Isso tem a ver com o que você sente agora?
+
+===== Questao_6 : fuzzy_credito.py =====
+
+=== Cliente A (renda alta, pouco endividado, bom histórico): renda=32k, comprometimento=12%, histórico=9
+Fuzzificação:
+  renda: {'baixa': 0.0, 'media': 0.17, 'alta': 0.57}
+  comp: {'baixo': 1.0, 'medio': 0.0, 'alto': 0.0}
+  hist: {'ruim': 0.0, 'regular': 0.0, 'bom': 1.0}
+Regras ativadas (força = min dos antecedentes):
+  R1  SE renda=alta E comp=qualquer E hist=bom ENTÃO risco=baixo  -> w=0.57
+  R2  SE renda=alta E comp=baixo E hist=qualquer ENTÃO risco=baixo  -> w=0.57
+  R3  SE renda=media E comp=baixo E hist=bom ENTÃO risco=baixo  -> w=0.17
+Defuzzificação (centroide): risco = 15.0 -> BAIXO
+  Outros defuzzificadores: bisetriz=15.0 | média dos máximos=12.0
+
+=== Cliente B (renda média, endividamento médio, histórico regular): renda=20k, comprometimento=45%, histórico=5
+Fuzzificação:
+  renda: {'baixa': 0.0, 'media': 0.83, 'alta': 0.0}
+  comp: {'baixo': 0.0, 'medio': 1.0, 'alto': 0.0}
+  hist: {'ruim': 0.0, 'regular': 0.8, 'bom': 0.0}
+Regras ativadas (força = min dos antecedentes):
+  R4  SE renda=media E comp=medio E hist=regular ENTÃO risco=moderado  -> w=0.80
+Defuzzificação (centroide): risco = 50.0 -> MODERADO
+  Outros defuzzificadores: bisetriz=50.0 | média dos máximos=50.0
+
+=== Cliente C (renda baixa, muito endividado, histórico ruim): renda=6k, comprometimento=80%, histórico=1.5
+Fuzzificação:
+  renda: {'baixa': 1.0, 'media': 0.0, 'alta': 0.0}
+  comp: {'baixo': 0.0, 'medio': 0.0, 'alto': 1.0}
+  hist: {'ruim': 1.0, 'regular': 0.0, 'bom': 0.0}
+Regras ativadas (força = min dos antecedentes):
+  R12 SE renda=baixa E comp=alto E hist=qualquer ENTÃO risco=alto  -> w=1.00
+  R13 SE renda=baixa E comp=qualquer E hist=ruim ENTÃO risco=alto  -> w=1.00
+  R14 SE renda=qualquer E comp=qualquer E hist=ruim ENTÃO risco=alto  -> w=1.00
+Defuzzificação (centroide): risco = 86.7 -> ALTO
+  Outros defuzzificadores: bisetriz=87.5 | média dos máximos=92.2
+
+=== Cliente D (renda média, endividamento alto, bom histórico): renda=22k, comprometimento=70%, histórico=8
+Fuzzificação:
+  renda: {'baixa': 0.0, 'media': 1.0, 'alta': 0.0}
+  comp: {'baixo': 0.0, 'medio': 0.0, 'alto': 0.75}
+  hist: {'ruim': 0.0, 'regular': 0.0, 'bom': 0.75}
+Regras ativadas (força = min dos antecedentes):
+  R10 SE renda=media E comp=alto E hist=bom ENTÃO risco=moderado  -> w=0.75
+Defuzzificação (centroide): risco = 50.0 -> MODERADO
+  Outros defuzzificadores: bisetriz=50.0 | média dos máximos=50.0
+
+=== Cliente E (renda alta, endividamento alto, bom histórico): renda=36k, comprometimento=70%, histórico=8
+Fuzzificação:
+  renda: {'baixa': 0.0, 'media': 0.0, 'alta': 1.0}
+  comp: {'baixo': 0.0, 'medio': 0.0, 'alto': 0.75}
+  hist: {'ruim': 0.0, 'regular': 0.0, 'bom': 0.75}
+Regras ativadas (força = min dos antecedentes):
+  R1  SE renda=alta E comp=qualquer E hist=bom ENTÃO risco=baixo  -> w=0.75
+  R11 SE renda=alta E comp=alto E hist=bom ENTÃO risco=moderado  -> w=0.75
+Defuzzificação (centroide): risco = 33.4 -> MODERADO
+  Outros defuzzificadores: bisetriz=35.0 | média dos máximos=25.5
+
+===== Questao_6 : fuzzy_skfuzzy.py =====
+Cliente A: risco(skfuzzy, centroide) = 14.8  | NumPy: 15.0
+Cliente B: risco(skfuzzy, centroide) = 50.0  | NumPy: 50.0
+Cliente C: risco(skfuzzy, centroide) = 86.8  | NumPy: 86.7
+Cliente D: risco(skfuzzy, centroide) = 50.0  | NumPy: 50.0
+Cliente E: risco(skfuzzy, centroide) = 33.3  | NumPy: 33.4
+
+===== Questao_7 : cbr_medico.py --demo =====
+Base: 18 casos, 6 doenças
+
+Sintomas informados: febre_alta, dor_atras_dos_olhos, dor_muscular, manchas_na_pele | idade=30 | dias=3
+RETRIEVE — 3 casos mais semelhantes:
+  C01 sim=0.837  Dengue             sintomas=febre_alta,dor_atras_dos_olhos,dor_muscular,manchas_na_pele,dor_de_cabeca
+  C02 sim=0.546  Dengue             sintomas=febre_alta,dor_muscular,dor_de_cabeca,nausea,manchas_na_pele
+  C03 sim=0.419  Dengue             sintomas=febre,dor_atras_dos_olhos,dor_muscular,fadiga
+REUSE — diagnóstico sugerido: Dengue (confiança relativa 100%); ranking: Dengue=1.18
+        tratamento associado: Hidratação oral abundante, paracetamol (evitar AINEs/AAS), acompanhamento e hemograma; retorno imediato se sinais de alarme
+
+Sintomas informados: febre, tosse_seca, perda_olfato_paladar, fadiga | idade=40 | dias=4
+RETRIEVE — 3 casos mais semelhantes:
+  C04 sim=0.832  COVID-19           sintomas=febre,tosse_seca,perda_olfato_paladar,fadiga,dor_de_cabeca
+  C06 sim=0.493  COVID-19           sintomas=febre,tosse,falta_de_ar,perda_olfato_paladar,fadiga
+  C05 sim=0.451  COVID-19           sintomas=tosse_seca,perda_olfato_paladar,dor_de_garganta,dor_muscular
+REUSE — diagnóstico sugerido: COVID-19 (confiança relativa 100%); ranking: COVID-19=1.14
+        tratamento associado: Repouso, hidratação, sintomáticos; isolamento; avaliar antiviral conforme risco; procurar serviço se falta de ar
+
+Sintomas informados: coriza, espirros, coceira_nos_olhos | idade=22 | dias=7
+RETRIEVE — 3 casos mais semelhantes:
+  C18 sim=0.933  Rinite alérgica    sintomas=espirros,coceira_nos_olhos,coriza
+  C17 sim=0.777  Rinite alérgica    sintomas=espirros,coriza,coceira_nos_olhos,dor_de_cabeca
+  C16 sim=0.742  Rinite alérgica    sintomas=coriza,espirros,coceira_nos_olhos,tosse
+REUSE — diagnóstico sugerido: Rinite alérgica (confiança relativa 100%); ranking: Rinite alérgica=2.03
+        tratamento associado: Evitar alérgenos, anti-histamínico e lavagem nasal; corticoide nasal se persistente
+
+Sintomas informados: febre, tosse, dor_de_cabeca | idade=35 | dias=2
+RETRIEVE — 3 casos mais semelhantes:
+  C04 sim=0.374  COVID-19           sintomas=febre,tosse_seca,perda_olfato_paladar,fadiga,dor_de_cabeca
+  C06 sim=0.361  COVID-19           sintomas=febre,tosse,falta_de_ar,perda_olfato_paladar,fadiga
+  C07 sim=0.357  Gripe              sintomas=febre,dor_muscular,calafrios,dor_de_cabeca,tosse_seca,dor_de_garganta
+REUSE — diagnóstico sugerido: COVID-19 (confiança relativa 68%); ranking: COVID-19=0.27, Gripe=0.13
+        tratamento associado: Repouso, hidratação, sintomáticos; isolamento; avaliar antiviral conforme risco; procurar serviço se falta de ar
+
+--- Ciclo Revise/Retain no caso ambíguo ---
+
+Sintomas informados: febre, tosse, dor_de_cabeca | idade=35 | dias=2
+RETRIEVE — 3 casos mais semelhantes:
+  C04 sim=0.374  COVID-19           sintomas=febre,tosse_seca,perda_olfato_paladar,fadiga,dor_de_cabeca
+  C06 sim=0.361  COVID-19           sintomas=febre,tosse,falta_de_ar,perda_olfato_paladar,fadiga
+  C07 sim=0.357  Gripe              sintomas=febre,dor_muscular,calafrios,dor_de_cabeca,tosse_seca,dor_de_garganta
+REUSE — diagnóstico sugerido: COVID-19 (confiança relativa 68%); ranking: COVID-19=0.27, Gripe=0.13
+        tratamento associado: Repouso, hidratação, sintomáticos; isolamento; avaliar antiviral conforme risco; procurar serviço se falta de ar
+REVISE — médico corrige o diagnóstico para 'Gripe' após exame clínico.
+RETAIN — caso C19 salvo (base agora com 19 casos).
+Reconsulta após aprendizado:
+
+Sintomas informados: febre, tosse, dor_de_cabeca | idade=35 | dias=2
+RETRIEVE — 3 casos mais semelhantes:
+  C19 sim=1.000  Gripe              sintomas=febre,tosse,dor_de_cabeca
+  C04 sim=0.367  COVID-19           sintomas=febre,tosse_seca,perda_olfato_paladar,fadiga,dor_de_cabeca
+  C06 sim=0.350  COVID-19           sintomas=febre,tosse,falta_de_ar,perda_olfato_paladar,fadiga
+REUSE — diagnóstico sugerido: Gripe (confiança relativa 79%); ranking: Gripe=1.00, COVID-19=0.26
+        tratamento associado: Repouso, hidratação e antitérmico
+
+Leave-one-out nos 18 casos originais: 13/18 = 72%
+
+===== Questao_7 : avaliacao.py =====
+Base: 18 casos
+pesos (sintomas, idade, duração)   k=1    k=3    k=5
+(0.85, 0.1, 0.05)                 66.7%  66.7%  72.2%
+(1, 0, 0)                         72.2%  72.2%  77.8%
+(0.7, 0.2, 0.1)                   61.1%  66.7%  72.2%
+(0.9, 0.1, 0)                     72.2%  72.2%  72.2%
+(0.6, 0.3, 0.1)                   61.1%  66.7%  72.2%
+
+===== Questao_8 : rede_bayesiana.py =====
+A priori: P(Pneumonia)=0.0579
+
+=== Experimento 1: atualização sequencial ===
+Evidências acumuladas                                      P(Pneumonia|e)
+(nenhuma)                                                          0.0579
+Febre=Sim                                                          0.3430
+Febre=Sim, Tosse=Sim                                               0.7708
+Febre=Sim, Tosse=Sim, Dispneia=Sim                                 0.9792
+Febre=Sim, Tosse=Sim, Dispneia=Sim, RaioX=Sim                      0.9993
+
+=== Experimento 2: comparação de conjuntos de evidência (explaining away) ===
+Tosse=Sim                                                          0.2835
+Tosse=Sim, Fumante=Sim                                             0.2569
+Tosse=Sim, Fumante=Não                                             0.3163
+Febre=Sim, Tosse=Sim                                               0.7708
+Febre=Sim, Tosse=Sim, Fumante=Sim                                  0.7461
+
+=== Experimento 3: evidência negativa e fatores de risco (inferência causal/diagnóstica) ===
+Fumante=Sim, Contato=Sim                                           0.3000
+Fumante=Não, Contato=Não                                           0.0200
+Febre=Não, Tosse=Não, Dispneia=Não                                 0.0003
+RaioX=Sim                                                          0.6482
+RaioX=Não, Febre=Sim, Tosse=Sim                                    0.2574
+
+=== Predição de sintomas dado diagnóstico ===
+Pneumonia=Sim {'Febre': 0.85, 'Tosse': 0.924, 'Dispneia': 0.7, 'RaioX': 0.9}
+Pneumonia=Não {'Febre': 0.1, 'Tosse': 0.144, 'Dispneia': 0.05, 'RaioX': 0.03}
+
+Febre⟂Tosse|Pneumonia? P(F|P,T)=0.8500 = P(F|P)=0.8500;  mas sem P: P(F|T)=0.3126 ≠ P(F)=0.1434
+
+===== Questao_8 : rede_pgmpy.py =====
+{}                                                                          pgmpy=0.0579  enumeração=0.0579  OK
+{'Febre': 'Sim'}                                                            pgmpy=0.3430  enumeração=0.3430  OK
+{'Febre': 'Sim', 'Tosse': 'Sim'}                                            pgmpy=0.7708  enumeração=0.7708  OK
+{'Febre': 'Sim', 'Tosse': 'Sim', 'Dispneia': 'Sim'}                         pgmpy=0.9792  enumeração=0.9792  OK
+{'Febre': 'Sim', 'Tosse': 'Sim', 'Dispneia': 'Sim', 'RaioX': 'Sim'}         pgmpy=0.9993  enumeração=0.9993  OK
+{'Tosse': 'Sim', 'Fumante': 'Sim'}                                          pgmpy=0.2569  enumeração=0.2569  OK
+{'RaioX': 'Nao', 'Febre': 'Sim', 'Tosse': 'Sim'}                            pgmpy=0.2574  enumeração=0.2574  OK
+
+===== Questao_9 : ontologia_livros.py =====
+livros.owl gerado: 18 classes, 12 propriedades de objeto + 6 de dados = 18 propriedades, 42 indivíduos
+
+== Consistência == CONSISTENTE
+
+== 70 fatos inferidos (amostra) ==
+   L01 : LivroTecnico   (subclasse: LivroDidatico ⊑ LivroTecnico)
+   L01 : Livro   (subclasse: LivroDidatico ⊑ Livro)
+   L02 : Livro   (subclasse: LivroTecnico ⊑ Livro)
+   L03 : Livro   (subclasse: LivroTecnico ⊑ Livro)
+   L04 : LivroTecnico   (subclasse: LivroDidatico ⊑ LivroTecnico)
+   L04 : Livro   (subclasse: LivroDidatico ⊑ Livro)
+   AutorSilva escreveu L01   (inversa de escritoPor)
+   AutorSilva escreveu L02   (inversa de escritoPor)
+   AutorLima escreveu L03   (inversa de escritoPor)
+   AutorCosta escreveu L04   (inversa de escritoPor)
+   AutorCosta escreveu L05   (inversa de escritoPor)
+   AutorMendes escreveu L06   (inversa de escritoPor)
+   AutorLima escreveu L07   (inversa de escritoPor)
+   AutorRocha escreveu L08   (inversa de escritoPor)
+
+== Classificação automática de indivíduos ==
+  LivroCurto: ['L04', 'L05', 'L07', 'L09', 'L12']
+  LeituraRapidaParaIniciante: ['L04', 'L05', 'L07', 'L12']
+  LivroBemAvaliado: ['L01', 'L03', 'L04', 'L07', 'L09', 'L10']
+  LivroDeIA: ['L01', 'L02', 'L03', 'L07', 'L08', 'L09', 'L10']
+  LeitorIniciante: ['Ana', 'Carla']
+
+== Recomendações para Ana (interesses: ['InteligenciaArtificial', 'Programacao']; nível: Iniciante) ==
+   9.20  L07 IA em Quadrinhos: Uma Aventura
+         - aborda InteligenciaArtificial (interesse do leitor)
+         - nível Iniciante
+         - nota 4.7
+         - classificado pelo reasoner como LivroCurto
+         - classificado pelo reasoner como LeituraRapidaParaIniciante
+         - classificado pelo reasoner como LivroBemAvaliado
+   8.70  L05 Estruturas de Dados Essenciais
+         - aborda Programacao (interesse do leitor)
+         - nível Iniciante
+         - nota 4.2
+         - classificado pelo reasoner como LivroCurto
+         - classificado pelo reasoner como LeituraRapidaParaIniciante
+         - ⚠ pré-requisito(s) ainda não lidos: L01 (Introdução à Inteligência Artificial)
+   8.60  L01 Introdução à Inteligência Artificial
+         - aborda InteligenciaArtificial (interesse do leitor)
+         - nível Iniciante
+         - nota 4.6
+         - classificado pelo reasoner como LivroBemAvaliado
+
+== Recomendações para Bruno (interesses: ['CienciaDeDados', 'InteligenciaArtificial']; nível: Intermediario) ==
+  11.50  L10 Machine Learning Fundamentals (EN)
+         - aborda CienciaDeDados, InteligenciaArtificial (interesse do leitor)
+         - nível Intermediario
+         - nota 4.5
+         - classificado pelo reasoner como LivroBemAvaliado
+  11.40  L02 Aprendizado de Máquina na Prática
+         - aborda CienciaDeDados, InteligenciaArtificial (interesse do leitor)
+         - nível Intermediario
+         - nota 4.4
+         - ⚠ pré-requisito(s) ainda não lidos: L04 (Python para Iniciantes)
+   9.10  L09 Inteligência Artificial Ética
+         - aborda InteligenciaArtificial (interesse do leitor)
+         - nível Intermediario
+         - nota 4.6
+         - classificado pelo reasoner como LivroCurto
+         - classificado pelo reasoner como LivroBemAvaliado
+
+== Recomendações para Carla (interesses: ['Etica', 'Logica']; nível: Iniciante) ==
+   8.40  L12 Fundamentos de Lógica
+         - aborda Logica (interesse do leitor)
+         - nível Iniciante
+         - nota 3.9
+         - classificado pelo reasoner como LivroCurto
+         - classificado pelo reasoner como LeituraRapidaParaIniciante
+   6.60  L09 Inteligência Artificial Ética
+         - aborda Etica (interesse do leitor)
+         - nível Intermediario
+         - nota 4.6
+         - classificado pelo reasoner como LivroCurto
+         - classificado pelo reasoner como LivroBemAvaliado
+
+== Teste de inconsistência (indivíduo LX ∈ LivroTecnico ⊓ LivroFiccao) == ['LX pertence a classes disjuntas LivroTecnico e LivroFiccao']
+
+===== Questao_9 : rodar_reasoner.py =====
+Classes: 18 | Propriedades: 18 | Indivíduos: 42
+
+== Consistência == CONSISTENTE (HermiT não encontrou contradição)
+Classes inconsistentes (≡ Nothing): []
+
+== Classificação inferida pelo HermiT (tipos diretos + indiretos, sem Thing) ==
+  Ana           : Leitor, LeitorIniciante, Pessoa
+  AutorCosta    : Autor, Pessoa
+  AutorLima     : Autor, Pessoa
+  AutorMendes   : Autor, Pessoa
+  AutorRocha    : Autor, Pessoa
+  AutorSilva    : Autor, Pessoa
+  AutorWang     : Autor, Pessoa
+  Bruno         : Leitor, Pessoa
+  Carla         : Leitor, LeitorIniciante, Pessoa
+  L01           : Livro, LivroBemAvaliado, LivroDeIA, LivroDidatico, LivroIniciante, LivroTecnico
+  L02           : Livro, LivroDeIA, LivroTecnico
+  L03           : Livro, LivroBemAvaliado, LivroDeIA, LivroTecnico
+  L04           : LeituraRapidaParaIniciante, Livro, LivroBemAvaliado, LivroCurto, LivroDidatico, LivroIniciante, LivroTecnico
+  L05           : LeituraRapidaParaIniciante, Livro, LivroCurto, LivroDidatico, LivroIniciante, LivroTecnico
+  L06           : Livro, LivroTecnico
+  L07           : LeituraRapidaParaIniciante, Livro, LivroBemAvaliado, LivroCurto, LivroDeIA, LivroIniciante, LivroTecnico
+  L08           : Livro, LivroDeIA, LivroFiccao, LivroIniciante
+  L09           : Livro, LivroBemAvaliado, LivroCurto, LivroDeIA, LivroTecnico
+  L10           : Livro, LivroBemAvaliado, LivroDeIA, LivroTecnico
+  L11           : Livro, LivroDidatico, LivroTecnico
+  L12           : LeituraRapidaParaIniciante, Livro, LivroCurto, LivroDidatico, LivroIniciante, LivroTecnico
+  Logica        : Tema
+
+== Classes definidas -> indivíduos (via HermiT) ==
+  LivroCurto: ['L04', 'L05', 'L07', 'L09', 'L12']
+  LeituraRapidaParaIniciante: ['L04', 'L05', 'L07', 'L12']
+  LivroBemAvaliado: ['L01', 'L03', 'L04', 'L07', 'L09', 'L10']
+  LivroDeIA: ['L01', 'L02', 'L03', 'L07', 'L08', 'L09', 'L10']
+  LeitorIniciante: ['Ana', 'Carla']
+
+== Relações implícitas (inversas/transitivas) ==
+  AutorSilva escreveu L01
+  AutorSilva escreveu L02
+  AutorLima escreveu L03
+  AutorLima escreveu L07
+  AutorCosta escreveu L05
+  AutorCosta escreveu L04
+  AutorCosta escreveu L11
+  AutorMendes escreveu L06
+  AutorMendes escreveu L09
+  AutorMendes escreveu L12
+  AutorRocha escreveu L08
+  AutorWang escreveu L10
+  (escreveu: 12 asserções no total após inferência)
+  L01 ehPrerequisitoDe L02
+  L01 ehPrerequisitoDe L05
+  L01 ehPrerequisitoDe L03
+  L02 ehPrerequisitoDe L03
+  L04 ehPrerequisitoDe L02
+  L04 ehPrerequisitoDe L03
+  (ehPrerequisitoDe: 6 asserções no total após inferência)
+
+== Teste de inconsistência (LX ∈ LivroTecnico ⊓ LivroFiccao) == HermiT: ONTOLOGIA INCONSISTENTE ✔ (disjunção detectada)
+
+===== Questao_10 : busca.py =====
+Admissibilidade/consistência de h:
+  h*(n): {'A': 13, 'B': 9, 'C': 6, 'D': 11, 'E': 7, 'F': 4, 'G': 5, 'H': 2, 'I': 0}
+  admissível: True
+  violações de consistência h(n)<=c(n,m)+h(m): []
+
+BFS : expansão=['A', 'B', 'D', 'C', 'E', 'G', 'F', 'H', 'I']
+      rota=A-B-C-F-I custo=15
+DFS : expansão=['A', 'B', 'C', 'F', 'E', 'D', 'G', 'H', 'I']
+      rota=A-B-C-F-E-D-G-H-I custo=29
+
+UCS:
+  expande A  g=0
+  expande D  g=3
+  expande B  g=4
+  expande E  g=6
+  expande C  g=9
+  expande F  g=9
+  expande G  g=9
+  expande H  g=11
+  expande I  g=13
+  rota=A-B-E-F-I custo=13 nós expandidos=9
+
+A*:
+  expande A: g= 0 h=10 f=10
+      fronteira (n:g+h=f): D:3+9=12, B:4+8=12
+  expande D: g= 3 h= 9 f=12
+      fronteira (n:g+h=f): B:4+8=12, E:7+6=13, G:9+5=14
+  expande B: g= 4 h= 8 f=12
+      fronteira (n:g+h=f): E:6+6=12, E:7+6=13, G:9+5=14, C:9+6=15
+  expande E: g= 6 h= 6 f=12
+      fronteira (n:g+h=f): F:9+4=13, H:11+2=13, G:9+5=14, C:9+6=15
+  expande F: g= 9 h= 4 f=13
+      fronteira (n:g+h=f): H:11+2=13, I:13+0=13, G:9+5=14, C:9+6=15, C:11+6=17
+  expande H: g=11 h= 2 f=13
+      fronteira (n:g+h=f): I:13+0=13, I:13+0=13, G:9+5=14, C:9+6=15, C:11+6=17, G:14+5=19
+  expande I: g=13 h= 0 f=13
+  rota=A-B-E-F-I custo=13 nós expandidos=7
+
+Versão com D e F obrigatórios (UCS no espaço estendido):
+  rota=A-D-E-F-I custo=14 estados expandidos=24
+
+A* no espaço estendido (estado = (local, {obrigatórios visitados})):
+  expande (A,{}) g=0 h=10 f=10
+  expande (D,{D}) g=3 h=9 f=12
+  expande (B,{}) g=4 h=8 f=12
+  expande (E,{}) g=6 h=6 f=12
+  expande (E,{D}) g=7 h=6 f=13
+  expande (F,{F}) g=9 h=4 f=13
+  expande (H,{}) g=11 h=2 f=13
+  expande (I,{}) g=13 h=0 f=13
+  expande (I,{F}) g=13 h=0 f=13
+  expande (G,{D}) g=9 h=5 f=14
+  expande (F,{D,F}) g=10 h=4 f=14
+  expande (H,{D}) g=12 h=2 f=14
+  expande (I,{D}) g=14 h=0 f=14
+  expande (I,{D,F}) g=14 h=0 f=14
+  A* c/ h(local): rota=A-D-E-F-I custo=14 estados expandidos=14
+
+===== Questao_11 : planejador_classico.py =====
+Plano SEM divisão de tarefas:
+  14:00–15:30  A — Preparar aula de IA
+  16:00–17:00  C — Reunião de pesquisa
+  17:00–18:00  D — Revisar artigo
+  utilidade = 62.0
+  • B (Corrigir trabalhos): não cabe hoje sem violar restrições; reagendar antes de 'amanha'.
+
+Plano COM divisão permitida (B pode ser feita em partes; capacidade amanhã=240min):
+  14:00–15:30  A — Preparar aula de IA
+  15:30–16:00  B — Corrigir trabalhos
+  16:00–17:00  C — Reunião de pesquisa
+  17:00–18:00  B — Corrigir trabalhos
+  utilidade = 67.5
+  • B (Corrigir trabalhos): 90 de 120 min hoje; restantes 30 min ficam para amanhã (prazo: amanha).
+  • D (Revisar artigo): adiado — prioridade Baixa e prazo na próxima semana; todo o tempo útil de hoje foi usado em tarefas com prazo mais curto.
+
+===== Questao_12 : teste_llm_stub.py =====
+==============================================================================
+CENÁRIO: Resposta válida (JSON em cerca ```json)
+origem da interpretação: LLM
+erros do verificador: nenhum
+==============================================================================
+CENÁRIO: Saída ruim do LLM (prioridade inválida, 100 min) -> verificador rejeita
+origem da interpretação: LLM
+erros do verificador: ['A: prioridade inválida', 'B: duração deve ser múltiplo de 30 min']
+==============================================================================
+CENÁRIO: Resposta que não é JSON -> fallback para heurística
+origem da interpretação: HEURÍSTICA (LLM falhou: JSONDecodeError)
+erros do verificador: nenhum
+==============================================================================
+CENÁRIO: Erro HTTP 500 -> fallback para heurística
+origem da interpretação: HEURÍSTICA (LLM falhou: HTTPError)
+erros do verificador: nenhum
+==============================================================================
+Fluxo completo com o 'LLM' (stub) respondendo:
+
+USUÁRIO: Preciso preparar uma aula de IA, corrigir trabalhos e participar de uma reunião de pesquisa às 16h. Tenho 4 horas hoje. 
+
+1. Interpretação (LLM): 3 tarefas extraídas.
+2. Verificação do esquema: OK.
+3. Planejador (busca exaustiva, utilidade esperada): utilidade=67.5.
+4. Validação do plano: OK
+
+Plano proposto:
+  14:00–15:30  Preparar aula de IA — prazo hoje e prioridade Alta (valor 30); precisa ser concluída hoje
+  15:30–16:00  Corrigir trabalhos — prazo amanha e prioridade Média (valor 10 = 2.50 por bloco de 30 min); ocupa o tempo livre que sobrou depois das tarefas de prazo hoje (90 de 120 min hoje)
+  16:00–17:00  Reunião de pesquisa — compromisso fixo informado (16:00–17:00); não pode ser movido
+  17:00–18:00  Corrigir trabalhos — prazo amanha e prioridade Média (valor 10 = 2.50 por bloco de 30 min); ocupa o tempo livre que sobrou depois das tarefas de prazo hoje (90 de 120 min hoje)
+Utilidade total = 67.5.
+Tarefas não concluídas hoje:
+  • B (Corrigir trabalhos): 90 de 120 min hoje; restantes 30 min ficam para amanhã (prazo: amanha).
+Contrafactual (sem divisão de tarefas): utilidade 60.0 (-7.5 vs. o plano escolhido).
+
+===== Questao_12 : agente_llm.py --demo =====
+USUÁRIO: Preciso preparar uma aula de Inteligência Artificial, corrigir trabalhos de alunos e participar de uma reunião de pesquisa. Tenho apenas quatro horas disponíveis hoje. A preparação da aula é urgente, mas a correção dos trabalhos precisa ser concluída até amanhã. Também preciso revisar um artigo, mas só na próxima semana. A reunião é às 16h. 
+
+1. Interpretação (HEURÍSTICA (LLM falhou: HTTPError)): 4 tarefas extraídas.
+2. Verificação do esquema: OK.
+3. Planejador (busca exaustiva, utilidade esperada): utilidade=67.5.
+4. Validação do plano: OK
+
+Plano proposto:
+  14:00–15:30  Preparar aula — prazo hoje e prioridade Alta (valor 30); precisa ser concluída hoje
+  15:30–16:00  Corrigir trabalhos — prazo amanha e prioridade Média (valor 10 = 2.50 por bloco de 30 min); ocupa o tempo livre que sobrou depois das tarefas de prazo hoje (90 de 120 min hoje)
+  16:00–17:00  Reunião de pesquisa — compromisso fixo informado (16:00–17:00); não pode ser movido
+  17:00–18:00  Corrigir trabalhos — prazo amanha e prioridade Média (valor 10 = 2.50 por bloco de 30 min); ocupa o tempo livre que sobrou depois das tarefas de prazo hoje (90 de 120 min hoje)
+Utilidade total = 67.5.
+Tarefas não concluídas hoje:
+  • B (Corrigir trabalhos): 90 de 120 min hoje; restantes 30 min ficam para amanhã (prazo: amanha).
+  • D (Revisar artigo): adiado — prioridade Baixa e prazo na próxima semana; todo o tempo útil de hoje foi usado em tarefas com prazo mais curto.
+Contrafactual (sem divisão de tarefas): utilidade 62.0 (-5.5 vs. o plano escolhido).
+
+Pergunta: por que D?  -> Revisar artigo ficou de fora hoje: prioridade Baixa, prazo semana (valor 2). O tempo útil foi usado por tarefas de maior valor por bloco; incluí-la hoje exigiria remover outra com prazo mais curto.
+Pergunta: por que B?  -> Corrigir trabalhos foi alocada em 15:30–16:00, 17:00–18:00 (prioridade Média, prazo amanha, valor 10).
+
+======================================================================
+Segundo cenário (outro pedido, outro horário de reunião)
+
+USUÁRIO: Preciso responder e-mails, preparar uma aula e participar de uma reunião às 15h. A aula é urgente. Também quero revisar um artigo, mas só na próxima semana. 
+
+1. Interpretação (HEURÍSTICA (LLM falhou: HTTPError)): 4 tarefas extraídas.
+2. Verificação do esquema: OK.
+3. Planejador (busca exaustiva, utilidade esperada): utilidade=68.0.
+4. Validação do plano: OK
+
+Plano proposto:
+  14:00–15:00  Revisar artigo — prazo semana e prioridade Baixa (valor 2 = 1.00 por bloco de 30 min); ocupa o tempo livre que sobrou depois das tarefas de prazo hoje (60 de 60 min hoje)
+  15:00–16:00  Reunião de pesquisa — compromisso fixo informado (15:00–16:00); não pode ser movido
+  16:00–16:30  Responder e-mails — prazo hoje e prioridade Baixa (valor 6); precisa ser concluída hoje
+  16:30–18:00  Preparar aula — prazo hoje e prioridade Alta (valor 30); precisa ser concluída hoje
+Utilidade total = 68.0.
+Contrafactual (sem divisão de tarefas): utilidade 68.0 (+0.0 vs. o plano escolhido).
+
+======================================================================
+Verificador em ação: uma saída ruim do 'LLM' é rejeitada
+
+['A: prioridade inválida', 'A: duração deve ser múltiplo de 30 min']
+
+Injeção de prompt (tratada como dado, não como instrução):
+1. Interpretação (HEURÍSTICA (LLM falhou: HTTPError)): 3 tarefas extraídas.
+2. Verificação do esquema: OK.
+3. Planejador (busca exaustiva, utilidade esperada): utilidade=67.5.
+4. Validação do plano: OK
+Plano proposto:
+  14:00–15:30  Preparar aula — prazo hoje e prioridade Alta (valor 30); precisa ser concluída hoje
+  15:30–16:00  Corrigir trabalhos — prazo amanha e prioridade Média (valor 10 = 2.50 por bloco de 30 min); ocupa o tempo livre que sobrou depois das tarefas de prazo hoje (90 de 120 min hoje)
+  16:00–17:00  Reunião de pesquisa — compromisso fixo informado (16:00–17:00); não pode ser movido
+  17:00–18:00  Corrigir trabalhos — prazo amanha e prioridade Média (valor 10 = 2.50 por bloco de 30 min); ocupa o tempo livre que sobrou depois das tarefas de prazo hoje (90 de 120 min hoje)
+Utilidade total = 67.5.
+Tarefas não concluídas hoje:
+  • B (Corrigir trabalhos): 90 de 120 min hoje; restantes 30 min ficam para amanhã (prazo: amanha).
+Contrafactual (sem divisão de tarefas): utilidade 60.0 (-7.5 vs. o plano escolhido).
+
+===== Questao_13 : transformer_demo.py =====
+1) Embedding + codificação posicional X (3x8):
+ [[ 0.001  1.299 -0.274  0.109 -0.455  0.008  0.06   2.34 ]
+ [ 0.349 -0.08   0.59   1.352  0.115  0.069 -0.028  1.695]
+ [-0.435 -0.874 -1.703 -0.309 -1.822  0.765 -1.265  1.271]]
+
+2) Cabeça 1: scores QKᵀ/√dk:
+[[-1.064 -1.678  1.379]
+ [-0.675 -0.902  0.717]
+ [-1.256 -1.253 -0.945]]
+   atenção (softmax por linha; cada linha soma 1):
+[[0.077 0.041 0.882]
+ [0.172 0.137 0.691]
+ [0.297 0.298 0.405]]
+
+2) Cabeça 2: scores QKᵀ/√dk:
+[[-2.209  0.082  1.243]
+ [ 0.154  0.049  0.144]
+ [-1.95  -1.754  0.32 ]]
+   atenção (softmax por linha; cada linha soma 1):
+[[0.024 0.233 0.743]
+ [0.346 0.312 0.342]
+ [0.084 0.102 0.814]]
+
+3) Saída da atenção multi-cabeça + residual + LayerNorm:
+ [[-0.927  0.493  1.385 -1.613 -0.078  1.199 -0.873  0.414]
+ [-0.65   0.403  2.257 -0.911  0.083  0.052 -1.218 -0.015]
+ [-0.875 -0.415  0.987 -0.96  -0.468  2.068 -0.722  0.386]]
+
+4) Saída do bloco (após FFN com ReLU + residual + LayerNorm):
+ [[ 1.06   0.282 -0.029 -1.307  1.712 -1.394 -0.448  0.125]
+ [ 0.806 -0.061  0.438 -1.196  1.283 -1.708 -0.51   0.949]
+ [ 1.301  0.29  -0.93   0.08   1.615 -1.508 -0.188 -0.661]]
+
+5) Atenção com máscara causal (decoder):
+ [[1.    0.    0.   ]
+ [0.647 0.353 0.   ]
+ [0.075 0.05  0.875]]
+
+==============================================================================
+PARTE B — codificação posicional (d=8) e atenção com pesos desenhados à mão
+==============================================================================
+PE(pos, 2i)=sin(pos/10000^(2i/d)), PE(pos, 2i+1)=cos(...)  [linhas = posições 0,1,2 de 'o gato dorme']:
+ [[ 0.     1.     0.     1.     0.     1.     0.     1.   ]
+ [ 0.841  0.54   0.1    0.995  0.01   1.     0.001  1.   ]
+ [ 0.909 -0.416  0.199  0.98   0.02   1.     0.002  1.   ]]
+
+Scores QKᵀ/√d_k (linhas = quem pergunta; colunas = quem responde) — ordem: ['o', 'gato', 'dorme'] 
+ [[0.    0.    0.   ]
+ [0.    0.    0.   ]
+ [0.    2.828 0.   ]]
+Pesos de atenção (softmax por linha):
+ [[0.333 0.333 0.333]
+ [0.333 0.333 0.333]
+ [0.053 0.894 0.053]]
+→ a linha de 'dorme' dá peso 89% a 'gato': o verbo 'encontra' o seu sujeito. 'o' e 'gato' (sem verbo) ficam ~uniformes.
+Saída da cabeça A·V (cada linha é uma mistura dos Values):
+ [[0.333 0.333]
+ [0.333 0.333]
+ [0.053 0.894]]
+Com máscara causal (decoder), 'dorme' não vê o futuro, mas vê o passado:
+ [[1.    0.    0.   ]
+ [0.5   0.5   0.   ]
+ [0.053 0.894 0.053]]
+
+==============================================================================
+PARTE C — exemplo do vídeo (Query=1; scores 1 e 0; Values [2,0] e [0,2])
+==============================================================================
+produtos escalares: [1. 0.] | divididos por √2: [0.71 0.  ] | softmax: [0.67 0.33] | soma: 1.0
+saída = Σ peso·Value = [1.34 0.66]
+
+===== Questao_14 : kg_saude.py =====
+1) Fechamento transitivo: Dengue ⊑ ['Arbovirose', 'DoencaInfecciosa']
+
+2) Diagnóstico por similaridade de subgrafos para Paciente1 (Febre, Manchas, DorOcular):
+   Dengue       Jaccard=0.75  sintomas em comum=['DorOcular', 'Febre', 'Manchas']
+   Zika         Jaccard=0.50  sintomas em comum=['Febre', 'Manchas']
+   Chikungunya  Jaccard=0.50  sintomas em comum=['Febre', 'Manchas']
+   Gripe        Jaccard=0.20  sintomas em comum=['Febre']
+
+3) Regra de segurança: suspeita=Dengue; alertas = [('Ibuprofeno', 'Dengue')] <- Ibuprofeno é contraindicado em Dengue (inferência de um fato novo: alerta)
+
+4) TransE (link prediction): tripla oculta ('Zika', 'tem_sintoma', 'Febre')
+   ranking de candidatos para (Zika, tem_sintoma, ?): ['Manchas', 'Conjuntivite', 'Febre', 'DorOcular', 'DorArticular'] -> posição de 'Febre' = 3/17
+
+5) Avaliação sobre 50 previsões (cada tripla oculta × 5 sementes) (ranking filtrado): posição média = 2.20, Hits@3 = 82%, acaso ≈ metade do nº de candidatos
+
+===== Questao_15 : ontologia_credito.py =====
+credito.owl gerado: 16 classes, 13 propriedades, 45 indivíduos
+Classificação correta: 30/30 | não classificados (mundo aberto): [] | classificações múltiplas (inconsistência): []
+
+Cliente EX asserido ClienteRiscoBaixo com EmpregoInstavel -> inferido também {'ClienteRiscoAlto'} => classes disjuntas => INCONSISTENTE (HermiT acusaria)
+
+Inferência em cadeia (definida -> risco -> ClienteElegivel): 19 elegíveis de 30; não elegíveis (RiscoAlto): ['E1', 'E11', 'E14', 'E16', 'E2', 'E20', 'E21', 'E26', 'E28', 'E4', 'E7']
+Relação implícita via inversa: EmpregoInstavel ehEmpregoDe ['E1', 'E2', 'E4', 'E7', 'E11', 'E14', 'E16', 'E20', 'E21', 'E26', 'E28']
+NOVO (Medio, Estavel, 15-35k, Ruim) -> {'ClienteRiscoModerado'}
+N2 (Medio, Estavel, >35k, Desconhecida) -> nenhuma classe inferida (mundo aberto: a ontologia não afirma nada)
+N3 (Baixo, Estavel, 15-35k, Boa) -> nenhuma classe inferida (a base da Lista 1 não tem Estável+Patrimônio Baixo: a árvore C4.5 não cobre este caso)
+
+===== Questao_15 : rodar_reasoner.py =====
+Classes: 16 | Propriedades: 13 | Indivíduos: 45
+
+== Consistência == CONSISTENTE (HermiT não encontrou contradição)
+Classes inconsistentes (≡ Nothing): []
+
+== Classificação automática de risco (inferida pelo HermiT) ==
+  E1  : ClienteRiscoAlto
+  E2  : ClienteRiscoAlto
+  E3  : ClienteRiscoModerado
+  E4  : ClienteRiscoAlto
+  E5  : ClienteRiscoBaixo
+  E6  : ClienteRiscoBaixo
+  E7  : ClienteRiscoAlto
+  E8  : ClienteRiscoModerado
+  E9  : ClienteRiscoBaixo
+  E10 : ClienteRiscoBaixo
+  E11 : ClienteRiscoAlto
+  E12 : ClienteRiscoModerado
+  E13 : ClienteRiscoBaixo
+  E14 : ClienteRiscoAlto
+  E15 : ClienteRiscoBaixo
+  E16 : ClienteRiscoAlto
+  E17 : ClienteRiscoModerado
+  E18 : ClienteRiscoModerado
+  E19 : ClienteRiscoBaixo
+  E20 : ClienteRiscoAlto
+  E21 : ClienteRiscoAlto
+  E22 : ClienteRiscoModerado
+  E23 : ClienteRiscoBaixo
+  E24 : ClienteRiscoModerado
+  E25 : ClienteRiscoBaixo
+  E26 : ClienteRiscoAlto
+  E27 : ClienteRiscoBaixo
+  E28 : ClienteRiscoAlto
+  E29 : ClienteRiscoModerado
+  E30 : ClienteRiscoModerado
+  Resumo: {'ClienteRiscoAlto': 11, 'ClienteRiscoModerado': 9, 'ClienteRiscoBaixo': 10}
+
+== Inferência em cadeia (definida -> risco -> ClienteElegivel) == 19 elegíveis: ['E10', 'E12', 'E13', 'E15', 'E17', 'E18', 'E19', 'E22', 'E23', 'E24', 'E25', 'E27', 'E29', 'E3', 'E30', 'E5', 'E6', 'E8', 'E9']
+
+== Teste de inconsistência (EX asserido RiscoBaixo + EmpregoInstavel => RiscoAlto) == HermiT: ONTOLOGIA INCONSISTENTE ✔

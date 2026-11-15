@@ -1,0 +1,15 @@
+Plano SEM divisão de tarefas:
+  14:00–15:30  A — Preparar aula de IA
+  16:00–17:00  C — Reunião de pesquisa
+  17:00–18:00  D — Revisar artigo
+  utilidade = 62.0
+  • B (Corrigir trabalhos): não cabe hoje sem violar restrições; reagendar antes de 'amanha'.
+
+Plano COM divisão permitida (B pode ser feita em partes; capacidade amanhã=240min):
+  14:00–15:30  A — Preparar aula de IA
+  15:30–16:00  B — Corrigir trabalhos
+  16:00–17:00  C — Reunião de pesquisa
+  17:00–18:00  B — Corrigir trabalhos
+  utilidade = 67.5
+  • B (Corrigir trabalhos): 90 de 120 min hoje; restantes 30 min ficam para amanhã (prazo: amanha).
+  • D (Revisar artigo): adiado — prioridade Baixa e prazo na próxima semana; todo o tempo útil de hoje foi usado em tarefas com prazo mais curto.

@@ -1,0 +1,10 @@
+credito.owl gerado: 16 classes, 13 propriedades, 45 indivíduos
+Classificação correta: 30/30 | não classificados (mundo aberto): [] | classificações múltiplas (inconsistência): []
+
+Cliente EX asserido ClienteRiscoBaixo com EmpregoInstavel -> inferido também {'ClienteRiscoAlto'} => classes disjuntas => INCONSISTENTE (HermiT acusaria)
+
+Inferência em cadeia (definida -> risco -> ClienteElegivel): 19 elegíveis de 30; não elegíveis (RiscoAlto): ['E1', 'E11', 'E14', 'E16', 'E2', 'E20', 'E21', 'E26', 'E28', 'E4', 'E7']
+Relação implícita via inversa: EmpregoInstavel ehEmpregoDe ['E1', 'E2', 'E4', 'E7', 'E11', 'E14', 'E16', 'E20', 'E21', 'E26', 'E28']
+NOVO (Medio, Estavel, 15-35k, Ruim) -> {'ClienteRiscoModerado'}
+N2 (Medio, Estavel, >35k, Desconhecida) -> nenhuma classe inferida (mundo aberto: a ontologia não afirma nada)
+N3 (Baixo, Estavel, 15-35k, Boa) -> nenhuma classe inferida (a base da Lista 1 não tem Estável+Patrimônio Baixo: a árvore C4.5 não cobre este caso)

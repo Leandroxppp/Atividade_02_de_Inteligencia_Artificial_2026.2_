@@ -1,0 +1,81 @@
+livros.owl gerado: 18 classes, 12 propriedades de objeto + 6 de dados = 18 propriedades, 42 indivíduos
+
+== Consistência == CONSISTENTE
+
+== 70 fatos inferidos (amostra) ==
+   L01 : LivroTecnico   (subclasse: LivroDidatico ⊑ LivroTecnico)
+   L01 : Livro   (subclasse: LivroDidatico ⊑ Livro)
+   L02 : Livro   (subclasse: LivroTecnico ⊑ Livro)
+   L03 : Livro   (subclasse: LivroTecnico ⊑ Livro)
+   L04 : LivroTecnico   (subclasse: LivroDidatico ⊑ LivroTecnico)
+   L04 : Livro   (subclasse: LivroDidatico ⊑ Livro)
+   AutorSilva escreveu L01   (inversa de escritoPor)
+   AutorSilva escreveu L02   (inversa de escritoPor)
+   AutorLima escreveu L03   (inversa de escritoPor)
+   AutorCosta escreveu L04   (inversa de escritoPor)
+   AutorCosta escreveu L05   (inversa de escritoPor)
+   AutorMendes escreveu L06   (inversa de escritoPor)
+   AutorLima escreveu L07   (inversa de escritoPor)
+   AutorRocha escreveu L08   (inversa de escritoPor)
+
+== Classificação automática de indivíduos ==
+  LivroCurto: ['L04', 'L05', 'L07', 'L09', 'L12']
+  LeituraRapidaParaIniciante: ['L04', 'L05', 'L07', 'L12']
+  LivroBemAvaliado: ['L01', 'L03', 'L04', 'L07', 'L09', 'L10']
+  LivroDeIA: ['L01', 'L02', 'L03', 'L07', 'L08', 'L09', 'L10']
+  LeitorIniciante: ['Ana', 'Carla']
+
+== Recomendações para Ana (interesses: ['InteligenciaArtificial', 'Programacao']; nível: Iniciante) ==
+   9.20  L07 IA em Quadrinhos: Uma Aventura
+         - aborda InteligenciaArtificial (interesse do leitor)
+         - nível Iniciante
+         - nota 4.7
+         - classificado pelo reasoner como LivroCurto
+         - classificado pelo reasoner como LeituraRapidaParaIniciante
+         - classificado pelo reasoner como LivroBemAvaliado
+   8.70  L05 Estruturas de Dados Essenciais
+         - aborda Programacao (interesse do leitor)
+         - nível Iniciante
+         - nota 4.2
+         - classificado pelo reasoner como LivroCurto
+         - classificado pelo reasoner como LeituraRapidaParaIniciante
+         - ⚠ pré-requisito(s) ainda não lidos: L01 (Introdução à Inteligência Artificial)
+   8.60  L01 Introdução à Inteligência Artificial
+         - aborda InteligenciaArtificial (interesse do leitor)
+         - nível Iniciante
+         - nota 4.6
+         - classificado pelo reasoner como LivroBemAvaliado
+
+== Recomendações para Bruno (interesses: ['CienciaDeDados', 'InteligenciaArtificial']; nível: Intermediario) ==
+  11.50  L10 Machine Learning Fundamentals (EN)
+         - aborda CienciaDeDados, InteligenciaArtificial (interesse do leitor)
+         - nível Intermediario
+         - nota 4.5
+         - classificado pelo reasoner como LivroBemAvaliado
+  11.40  L02 Aprendizado de Máquina na Prática
+         - aborda CienciaDeDados, InteligenciaArtificial (interesse do leitor)
+         - nível Intermediario
+         - nota 4.4
+         - ⚠ pré-requisito(s) ainda não lidos: L04 (Python para Iniciantes)
+   9.10  L09 Inteligência Artificial Ética
+         - aborda InteligenciaArtificial (interesse do leitor)
+         - nível Intermediario
+         - nota 4.6
+         - classificado pelo reasoner como LivroCurto
+         - classificado pelo reasoner como LivroBemAvaliado
+
+== Recomendações para Carla (interesses: ['Etica', 'Logica']; nível: Iniciante) ==
+   8.40  L12 Fundamentos de Lógica
+         - aborda Logica (interesse do leitor)
+         - nível Iniciante
+         - nota 3.9
+         - classificado pelo reasoner como LivroCurto
+         - classificado pelo reasoner como LeituraRapidaParaIniciante
+   6.60  L09 Inteligência Artificial Ética
+         - aborda Etica (interesse do leitor)
+         - nível Intermediario
+         - nota 4.6
+         - classificado pelo reasoner como LivroCurto
+         - classificado pelo reasoner como LivroBemAvaliado
+
+== Teste de inconsistência (indivíduo LX ∈ LivroTecnico ⊓ LivroFiccao) == ['LX pertence a classes disjuntas LivroTecnico e LivroFiccao']

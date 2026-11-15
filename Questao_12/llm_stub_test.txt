@@ -1,0 +1,35 @@
+==============================================================================
+CENÁRIO: Resposta válida (JSON em cerca ```json)
+origem da interpretação: LLM
+erros do verificador: nenhum
+==============================================================================
+CENÁRIO: Saída ruim do LLM (prioridade inválida, 100 min) -> verificador rejeita
+origem da interpretação: LLM
+erros do verificador: ['A: prioridade inválida', 'B: duração deve ser múltiplo de 30 min']
+==============================================================================
+CENÁRIO: Resposta que não é JSON -> fallback para heurística
+origem da interpretação: HEURÍSTICA (LLM falhou: JSONDecodeError)
+erros do verificador: nenhum
+==============================================================================
+CENÁRIO: Erro HTTP 500 -> fallback para heurística
+origem da interpretação: HEURÍSTICA (LLM falhou: HTTPError)
+erros do verificador: nenhum
+==============================================================================
+Fluxo completo com o 'LLM' (stub) respondendo:
+
+USUÁRIO: Preciso preparar uma aula de IA, corrigir trabalhos e participar de uma reunião de pesquisa às 16h. Tenho 4 horas hoje. 
+
+1. Interpretação (LLM): 3 tarefas extraídas.
+2. Verificação do esquema: OK.
+3. Planejador (busca exaustiva, utilidade esperada): utilidade=67.5.
+4. Validação do plano: OK
+
+Plano proposto:
+  14:00–15:30  Preparar aula de IA — prazo hoje e prioridade Alta (valor 30); precisa ser concluída hoje
+  15:30–16:00  Corrigir trabalhos — prazo amanha e prioridade Média (valor 10 = 2.50 por bloco de 30 min); ocupa o tempo livre que sobrou depois das tarefas de prazo hoje (90 de 120 min hoje)
+  16:00–17:00  Reunião de pesquisa — compromisso fixo informado (16:00–17:00); não pode ser movido
+  17:00–18:00  Corrigir trabalhos — prazo amanha e prioridade Média (valor 10 = 2.50 por bloco de 30 min); ocupa o tempo livre que sobrou depois das tarefas de prazo hoje (90 de 120 min hoje)
+Utilidade total = 67.5.
+Tarefas não concluídas hoje:
+  • B (Corrigir trabalhos): 90 de 120 min hoje; restantes 30 min ficam para amanhã (prazo: amanha).
+Contrafactual (sem divisão de tarefas): utilidade 60.0 (-7.5 vs. o plano escolhido).

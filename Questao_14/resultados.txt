@@ -1,0 +1,14 @@
+1) Fechamento transitivo: Dengue ⊑ ['Arbovirose', 'DoencaInfecciosa']
+
+2) Diagnóstico por similaridade de subgrafos para Paciente1 (Febre, Manchas, DorOcular):
+   Dengue       Jaccard=0.75  sintomas em comum=['DorOcular', 'Febre', 'Manchas']
+   Zika         Jaccard=0.50  sintomas em comum=['Febre', 'Manchas']
+   Chikungunya  Jaccard=0.50  sintomas em comum=['Febre', 'Manchas']
+   Gripe        Jaccard=0.20  sintomas em comum=['Febre']
+
+3) Regra de segurança: suspeita=Dengue; alertas = [('Ibuprofeno', 'Dengue')] <- Ibuprofeno é contraindicado em Dengue (inferência de um fato novo: alerta)
+
+4) TransE (link prediction): tripla oculta ('Zika', 'tem_sintoma', 'Febre')
+   ranking de candidatos para (Zika, tem_sintoma, ?): ['Manchas', 'Conjuntivite', 'Febre', 'DorOcular', 'DorArticular'] -> posição de 'Febre' = 3/17
+
+5) Avaliação sobre 50 previsões (cada tripla oculta × 5 sementes) (ranking filtrado): posição média = 2.20, Hits@3 = 82%, acaso ≈ metade do nº de candidatos

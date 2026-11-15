@@ -1,0 +1,41 @@
+Classes: 16 | Propriedades: 13 | Indivíduos: 45
+
+== Consistência == CONSISTENTE (HermiT não encontrou contradição)
+Classes inconsistentes (≡ Nothing): []
+
+== Classificação automática de risco (inferida pelo HermiT) ==
+  E1  : ClienteRiscoAlto
+  E2  : ClienteRiscoAlto
+  E3  : ClienteRiscoModerado
+  E4  : ClienteRiscoAlto
+  E5  : ClienteRiscoBaixo
+  E6  : ClienteRiscoBaixo
+  E7  : ClienteRiscoAlto
+  E8  : ClienteRiscoModerado
+  E9  : ClienteRiscoBaixo
+  E10 : ClienteRiscoBaixo
+  E11 : ClienteRiscoAlto
+  E12 : ClienteRiscoModerado
+  E13 : ClienteRiscoBaixo
+  E14 : ClienteRiscoAlto
+  E15 : ClienteRiscoBaixo
+  E16 : ClienteRiscoAlto
+  E17 : ClienteRiscoModerado
+  E18 : ClienteRiscoModerado
+  E19 : ClienteRiscoBaixo
+  E20 : ClienteRiscoAlto
+  E21 : ClienteRiscoAlto
+  E22 : ClienteRiscoModerado
+  E23 : ClienteRiscoBaixo
+  E24 : ClienteRiscoModerado
+  E25 : ClienteRiscoBaixo
+  E26 : ClienteRiscoAlto
+  E27 : ClienteRiscoBaixo
+  E28 : ClienteRiscoAlto
+  E29 : ClienteRiscoModerado
+  E30 : ClienteRiscoModerado
+  Resumo: {'ClienteRiscoAlto': 11, 'ClienteRiscoModerado': 9, 'ClienteRiscoBaixo': 10}
+
+== Inferência em cadeia (definida -> risco -> ClienteElegivel) == 19 elegíveis: ['E10', 'E12', 'E13', 'E15', 'E17', 'E18', 'E19', 'E22', 'E23', 'E24', 'E25', 'E27', 'E29', 'E3', 'E30', 'E5', 'E6', 'E8', 'E9']
+
+== Teste de inconsistência (EX asserido RiscoBaixo + EmpregoInstavel => RiscoAlto) == HermiT: ONTOLOGIA INCONSISTENTE ✔

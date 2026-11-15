@@ -1,0 +1,59 @@
+Classes: 18 | Propriedades: 18 | Indivíduos: 42
+
+== Consistência == CONSISTENTE (HermiT não encontrou contradição)
+Classes inconsistentes (≡ Nothing): []
+
+== Classificação inferida pelo HermiT (tipos diretos + indiretos, sem Thing) ==
+  Ana           : Leitor, LeitorIniciante, Pessoa
+  AutorCosta    : Autor, Pessoa
+  AutorLima     : Autor, Pessoa
+  AutorMendes   : Autor, Pessoa
+  AutorRocha    : Autor, Pessoa
+  AutorSilva    : Autor, Pessoa
+  AutorWang     : Autor, Pessoa
+  Bruno         : Leitor, Pessoa
+  Carla         : Leitor, LeitorIniciante, Pessoa
+  L01           : Livro, LivroBemAvaliado, LivroDeIA, LivroDidatico, LivroIniciante, LivroTecnico
+  L02           : Livro, LivroDeIA, LivroTecnico
+  L03           : Livro, LivroBemAvaliado, LivroDeIA, LivroTecnico
+  L04           : LeituraRapidaParaIniciante, Livro, LivroBemAvaliado, LivroCurto, LivroDidatico, LivroIniciante, LivroTecnico
+  L05           : LeituraRapidaParaIniciante, Livro, LivroCurto, LivroDidatico, LivroIniciante, LivroTecnico
+  L06           : Livro, LivroTecnico
+  L07           : LeituraRapidaParaIniciante, Livro, LivroBemAvaliado, LivroCurto, LivroDeIA, LivroIniciante, LivroTecnico
+  L08           : Livro, LivroDeIA, LivroFiccao, LivroIniciante
+  L09           : Livro, LivroBemAvaliado, LivroCurto, LivroDeIA, LivroTecnico
+  L10           : Livro, LivroBemAvaliado, LivroDeIA, LivroTecnico
+  L11           : Livro, LivroDidatico, LivroTecnico
+  L12           : LeituraRapidaParaIniciante, Livro, LivroCurto, LivroDidatico, LivroIniciante, LivroTecnico
+  Logica        : Tema
+
+== Classes definidas -> indivíduos (via HermiT) ==
+  LivroCurto: ['L04', 'L05', 'L07', 'L09', 'L12']
+  LeituraRapidaParaIniciante: ['L04', 'L05', 'L07', 'L12']
+  LivroBemAvaliado: ['L01', 'L03', 'L04', 'L07', 'L09', 'L10']
+  LivroDeIA: ['L01', 'L02', 'L03', 'L07', 'L08', 'L09', 'L10']
+  LeitorIniciante: ['Ana', 'Carla']
+
+== Relações implícitas (inversas/transitivas) ==
+  AutorSilva escreveu L01
+  AutorSilva escreveu L02
+  AutorLima escreveu L03
+  AutorLima escreveu L07
+  AutorCosta escreveu L05
+  AutorCosta escreveu L04
+  AutorCosta escreveu L11
+  AutorMendes escreveu L06
+  AutorMendes escreveu L09
+  AutorMendes escreveu L12
+  AutorRocha escreveu L08
+  AutorWang escreveu L10
+  (escreveu: 12 asserções no total após inferência)
+  L01 ehPrerequisitoDe L02
+  L01 ehPrerequisitoDe L05
+  L01 ehPrerequisitoDe L03
+  L02 ehPrerequisitoDe L03
+  L04 ehPrerequisitoDe L02
+  L04 ehPrerequisitoDe L03
+  (ehPrerequisitoDe: 6 asserções no total após inferência)
+
+== Teste de inconsistência (LX ∈ LivroTecnico ⊓ LivroFiccao) == HermiT: ONTOLOGIA INCONSISTENTE ✔ (disjunção detectada)

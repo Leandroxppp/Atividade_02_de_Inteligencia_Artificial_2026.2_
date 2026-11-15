@@ -1,0 +1,6 @@
+numpy
+matplotlib
+networkx
+scikit-fuzzy
+pgmpy
+owlready2

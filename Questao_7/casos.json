@@ -1,0 +1,246 @@
+[
+ {
+  "id": "C01",
+  "sintomas": [
+   "febre_alta",
+   "dor_atras_dos_olhos",
+   "dor_muscular",
+   "manchas_na_pele",
+   "dor_de_cabeca"
+  ],
+  "idade": 28,
+  "dias": 4,
+  "diagnostico": "Dengue",
+  "tratamento": "Hidratação oral abundante, paracetamol (evitar AINEs/AAS), acompanhamento e hemograma; retorno imediato se sinais de alarme"
+ },
+ {
+  "id": "C02",
+  "sintomas": [
+   "febre_alta",
+   "dor_muscular",
+   "dor_de_cabeca",
+   "nausea",
+   "manchas_na_pele"
+  ],
+  "idade": 35,
+  "dias": 3,
+  "diagnostico": "Dengue",
+  "tratamento": "Hidratação oral abundante, paracetamol (evitar AINEs/AAS), acompanhamento e hemograma; retorno imediato se sinais de alarme"
+ },
+ {
+  "id": "C03",
+  "sintomas": [
+   "febre",
+   "dor_atras_dos_olhos",
+   "dor_muscular",
+   "fadiga"
+  ],
+  "idade": 19,
+  "dias": 5,
+  "diagnostico": "Dengue",
+  "tratamento": "Hidratação oral abundante, paracetamol (evitar AINEs/AAS), acompanhamento e hemograma; retorno imediato se sinais de alarme"
+ },
+ {
+  "id": "C04",
+  "sintomas": [
+   "febre",
+   "tosse_seca",
+   "perda_olfato_paladar",
+   "fadiga",
+   "dor_de_cabeca"
+  ],
+  "idade": 41,
+  "dias": 4,
+  "diagnostico": "COVID-19",
+  "tratamento": "Repouso, hidratação, sintomáticos; isolamento; avaliar antiviral conforme risco; procurar serviço se falta de ar"
+ },
+ {
+  "id": "C05",
+  "sintomas": [
+   "tosse_seca",
+   "perda_olfato_paladar",
+   "dor_de_garganta",
+   "dor_muscular"
+  ],
+  "idade": 27,
+  "dias": 3,
+  "diagnostico": "COVID-19",
+  "tratamento": "Repouso, hidratação, sintomáticos; isolamento; avaliar antiviral conforme risco; procurar serviço se falta de ar"
+ },
+ {
+  "id": "C06",
+  "sintomas": [
+   "febre",
+   "tosse",
+   "falta_de_ar",
+   "perda_olfato_paladar",
+   "fadiga"
+  ],
+  "idade": 58,
+  "dias": 6,
+  "diagnostico": "COVID-19",
+  "tratamento": "Repouso, hidratação, sintomáticos; isolamento; avaliar antiviral conforme risco; procurar serviço se falta de ar"
+ },
+ {
+  "id": "C07",
+  "sintomas": [
+   "febre",
+   "dor_muscular",
+   "calafrios",
+   "dor_de_cabeca",
+   "tosse_seca",
+   "dor_de_garganta"
+  ],
+  "idade": 33,
+  "dias": 2,
+  "diagnostico": "Gripe",
+  "tratamento": "Repouso, hidratação e antitérmico; antiviral (oseltamivir) se grupo de risco"
+ },
+ {
+  "id": "C08",
+  "sintomas": [
+   "febre_alta",
+   "calafrios",
+   "dor_muscular",
+   "coriza",
+   "tosse"
+  ],
+  "idade": 45,
+  "dias": 3,
+  "diagnostico": "Gripe",
+  "tratamento": "Repouso, hidratação e antitérmico; antiviral (oseltamivir) se grupo de risco"
+ },
+ {
+  "id": "C09",
+  "sintomas": [
+   "febre",
+   "coriza",
+   "dor_de_garganta",
+   "dor_muscular",
+   "fadiga"
+  ],
+  "idade": 24,
+  "dias": 2,
+  "diagnostico": "Gripe",
+  "tratamento": "Repouso, hidratação e antitérmico; antiviral (oseltamivir) se grupo de risco"
+ },
+ {
+  "id": "C10",
+  "sintomas": [
+   "febre_alta",
+   "tosse_com_catarro",
+   "falta_de_ar",
+   "dor_toracica",
+   "calafrios"
+  ],
+  "idade": 67,
+  "dias": 5,
+  "diagnostico": "Pneumonia",
+  "tratamento": "Avaliação clínica/radiografia; antibioticoterapia conforme gravidade; internação se hipoxemia"
+ },
+ {
+  "id": "C11",
+  "sintomas": [
+   "febre",
+   "tosse_com_catarro",
+   "dor_toracica",
+   "fadiga",
+   "falta_de_ar"
+  ],
+  "idade": 72,
+  "dias": 7,
+  "diagnostico": "Pneumonia",
+  "tratamento": "Avaliação clínica/radiografia; antibioticoterapia conforme gravidade; internação se hipoxemia"
+ },
+ {
+  "id": "C12",
+  "sintomas": [
+   "febre_alta",
+   "tosse_com_catarro",
+   "calafrios",
+   "dor_toracica"
+  ],
+  "idade": 52,
+  "dias": 4,
+  "diagnostico": "Pneumonia",
+  "tratamento": "Avaliação clínica/radiografia; antibioticoterapia conforme gravidade; internação se hipoxemia"
+ },
+ {
+  "id": "C13",
+  "sintomas": [
+   "nausea",
+   "vomito",
+   "diarreia",
+   "dor_abdominal",
+   "febre"
+  ],
+  "idade": 26,
+  "dias": 2,
+  "diagnostico": "Gastroenterite",
+  "tratamento": "Reidratação oral, dieta leve, antiemético se necessário; avaliar sinais de desidratação"
+ },
+ {
+  "id": "C14",
+  "sintomas": [
+   "diarreia",
+   "dor_abdominal",
+   "nausea",
+   "fadiga"
+  ],
+  "idade": 38,
+  "dias": 3,
+  "diagnostico": "Gastroenterite",
+  "tratamento": "Reidratação oral, dieta leve, antiemético se necessário; avaliar sinais de desidratação"
+ },
+ {
+  "id": "C15",
+  "sintomas": [
+   "vomito",
+   "diarreia",
+   "febre",
+   "dor_abdominal"
+  ],
+  "idade": 9,
+  "dias": 2,
+  "diagnostico": "Gastroenterite",
+  "tratamento": "Reidratação oral, dieta leve, antiemético se necessário; avaliar sinais de desidratação"
+ },
+ {
+  "id": "C16",
+  "sintomas": [
+   "coriza",
+   "espirros",
+   "coceira_nos_olhos",
+   "tosse"
+  ],
+  "idade": 21,
+  "dias": 14,
+  "diagnostico": "Rinite alérgica",
+  "tratamento": "Evitar alérgenos, anti-histamínico e lavagem nasal; corticoide nasal se persistente"
+ },
+ {
+  "id": "C17",
+  "sintomas": [
+   "espirros",
+   "coriza",
+   "coceira_nos_olhos",
+   "dor_de_cabeca"
+  ],
+  "idade": 30,
+  "dias": 10,
+  "diagnostico": "Rinite alérgica",
+  "tratamento": "Evitar alérgenos, anti-histamínico e lavagem nasal; corticoide nasal se persistente"
+ },
+ {
+  "id": "C18",
+  "sintomas": [
+   "espirros",
+   "coceira_nos_olhos",
+   "coriza"
+  ],
+  "idade": 12,
+  "dias": 20,
+  "diagnostico": "Rinite alérgica",
+  "tratamento": "Evitar alérgenos, anti-histamínico e lavagem nasal; corticoide nasal se persistente"
+ }
+]
