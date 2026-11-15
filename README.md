@@ -1,4 +1,4 @@
-# Lista 2 — Inteligência Artificial (PPGI 2026.2) — respostas e código
+﻿# Lista 2 — Inteligência Artificial (PPGI 2026.2) — respostas e código
 
 Cada pasta `Questao_N/` tem um `README.md` com o relatório e, quando aplicável, o código, os dados e as saídas (`resultados.txt`).
 
@@ -42,4 +42,4 @@ Python 3, `numpy`, `matplotlib`, `networkx`. Extras: `scikit-fuzzy`, `pgmpy`, `o
 
 **Q9 (entrada do usuário):** `python ontologia_livros.py` executa a demonstração com os leitores Ana, Bruno e Carla; `python ontologia_livros.py --usuario` pergunta nome, temas, nível, idiomas e livros já lidos, insere o perfil como novo indivíduo `Leitor`, roda o reasoner e exibe as recomendações justificadas.
 
-**Demonstração:** vídeo `demo_lista2.mp4` (≈3min50s, execução no terminal dos scripts das Q7 [CBR], Q8 [rede bayesiana] e Q9 [ontologia + reasoner no Protégé e por código, recomendações para Ana, Bruno e Carla, e modo interativo com perfil informado pelo usuário]).
+**Demonstração:** vídeo `demo_lista2_final.mp4` (≈3min50s, execução no terminal dos scripts das Q7 [CBR], Q8 [rede bayesiana] e Q9 [ontologia + reasoner no Protégé e por código, recomendações para Ana, Bruno e Carla, e modo interativo com perfil informado pelo usuário]).
