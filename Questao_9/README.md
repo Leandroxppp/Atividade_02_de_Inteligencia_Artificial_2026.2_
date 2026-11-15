@@ -1,47 +1,576 @@
-# Questão 9 — Sistema de recomendação de livros baseado em ontologia OWL 2
+# Cafeteria 3D - OpenGL
 
-Arquivos: `livros.owl` (ontologia), `rodar_reasoner.py` (**HermiT real** via Owlready2, para rodar localmente), `owlgen.py` (gerador RDF/XML), `ontologia_livros.py` (ontologia + reasoner mínimo + recomendador), `resultados.txt`. Execute `python ontologia_livros.py`.
+Projeto desenvolvido para a disciplina de Computação Gráfica.
 
-> **Validação com reasoner real (HermiT).** `livros.owl` foi carregado e classificado pelo **HermiT 1.4 via Owlready2** (`python rodar_reasoner.py`; saída completa em `hermit_real.txt`). Resultado: ontologia **consistente**; `LivroCurto` = L04, L05, L07, L09, L12; `LeituraRapidaParaIniciante` = L04, L05, L07, L12; `LivroBemAvaliado` = L01, L03, L04, L07, L09, L10; `LeitorIniciante` = Ana, Carla; inversas inferidas (`AutorSilva escreveu L01` etc.) e transitividade de `ehPrerequisitoDe` (L04→L03). **Teste de inconsistência:** um indivíduo `LX` em `LivroTecnico ⊓ LivroFiccao` (classes disjuntas) faz o HermiT acusar a ontologia como inconsistente. Essas classificações **coincidem** com as do reasoner mínimo em Python (`ontologia_livros.py`), usado no recomendador para gerar as justificativas. *Reprodução no Protégé:* abrir `livros.owl`, Reasoner → HermiT → Start reasoner e consultar *Inferred class hierarchy* e *Individuals by type*.
+A aplicação apresenta uma cafeteria 3D explorável, desenvolvida diretamente em C++ com OpenGL. O usuário pode caminhar pelo ambiente utilizando teclado e mouse, interagir com objetos e explorar diferentes áreas da cafeteria.
 
-## 1. Domínio
-Recomendação de **livros de computação/IA** para leitores, segundo interesses, nível, idioma e histórico (livros fictícios).
+O projeto foi desenvolvido sem o uso de motores gráficos ou frameworks como Unity, Godot ou Three.js. A janela e a entrada de teclado e mouse usam a biblioteca GLFW; toda a modelagem, iluminação, texturas e colisões são implementadas no próprio projeto.
 
-## 2. Modelagem (requisitos: ≥10 classes, ≥15 propriedades)
-**18 classes:** Pessoa ⊒ {Autor, Leitor}; Livro ⊒ {LivroTecnico ⊒ LivroDidatico, LivroFiccao}; Editora, Genero, Tema, Nivel, Idioma; classes **definidas**: LivroCurto, LivroIniciante, LivroDeIA, LivroBemAvaliado, LeituraRapidaParaIniciante, LeitorIniciante.
-**18 propriedades:** 12 de objeto (`escritoPor`↔`escreveu`, `publicadoPor` (funcional), `temGenero`, `abordaTema`, `temNivel` (funcional), `escritoEmIdioma` (funcional), `ehPrerequisitoDe` (**transitiva**), `interessadoEm`, `prefereIdioma`, `temNivelLeitura` (funcional), `jaLeu`) e 6 de dados (`titulo`, `numPaginas`, `anoPublicacao`, `nota`, `preco`, `nome`).
-**Axiomas:** domínios/imagens, hierarquia, disjunção (`LivroTecnico ⊥ LivroFiccao`; Livro, Pessoa, Editora… mutuamente disjuntas), inversa, transitividade, funcionalidade e **equivalências**:
+## Documentação do código
+
+Para uma explicação detalhada da arquitetura, do fluxo de execução, da matemática da câmera e das colisões, da renderização e das decisões de projeto, consulte:
+
+- [`docs/GUIA_CODIGO.md`](docs/GUIA_CODIGO.md) — guia de estudo da versão atual do código.
+
+---
+
+## Cenário
+
+A cena representa o interior de uma cafeteria e possui uma área destinada aos clientes, um balcão de atendimento e um banheiro.
+
+Os objetos principais foram modelados pela equipe utilizando primitivas geométricas e transformações do OpenGL.
+
+Entre os elementos presentes na cena estão:
+
+- mesas;
+- cadeiras;
+- balcão;
+- vitrine de doces;
+- máquina de café;
+- registradora;
+- prateleira;
+- cardápio;
+- luminárias;
+- janela;
+- porta principal;
+- porta do banheiro;
+- vaso sanitário;
+- pia;
+- espelho;
+- xícara;
+- vaso decorativo;
+- porta-guardanapos;
+- interruptor.
+
+Não foram utilizados modelos 3D externos na composição dos objetos principais da cena.
+
+---
+
+## Funcionalidades
+
+O projeto possui:
+
+- navegação em primeira pessoa;
+- movimentação utilizando W, A, S e D;
+- controle da câmera utilizando o mouse;
+- rotação da câmera pelas setas do teclado (alternativa ao mouse);
+- sistema próprio de colisões;
+- abertura e fechamento da porta principal;
+- abertura e fechamento da porta do banheiro;
+- movimentação individual das cadeiras;
+- interruptor para ligar e desligar a iluminação;
+- iluminação geral do ambiente;
+- três luminárias com iluminação localizada;
+- materiais diferentes para os objetos;
+- mapeamento de texturas;
+- animações suaves nas interações.
+
+---
+
+## Controles
+
+| Tecla / Controle | Função |
+|---|---|
+| `W` | Mover para frente |
+| `S` | Mover para trás |
+| `A` | Mover para a esquerda |
+| `D` | Mover para a direita |
+| `Mouse` | Controlar a direção da câmera |
+| `↑` / `↓` | Olhar para cima / para baixo |
+| `←` / `→` | Girar a câmera para a esquerda / direita |
+| `E` | Interagir com objetos próximos |
+| `Esc` | Fechar a aplicação |
+
+O cursor é capturado pela janela enquanto ela está em foco. Ao perder o foco, as teclas são liberadas automaticamente.
+
+---
+
+## Interações
+
+### Porta principal
+
+Ao se aproximar da porta principal e pressionar `E`, a porta abre ou fecha através de uma animação de rotação.
+
+Quando a porta está fechada, a colisão impede que o jogador atravesse a entrada.
+
+---
+
+### Porta do banheiro
+
+A porta do banheiro também pode ser aberta e fechada utilizando `E`.
+
+A porta possui animação própria e colisão independente da porta principal.
+
+Quando fechada, a passagem é bloqueada. Quando aberta, o jogador pode entrar no banheiro.
+
+---
+
+### Cadeiras
+
+As seis cadeiras da cafeteria podem ser movimentadas individualmente.
+
+Ao se aproximar de uma cadeira e pressionar `E`, ela é afastada da mesa.
+
+Pressionando `E` novamente, a cadeira retorna à posição original.
+
+A colisão acompanha o deslocamento de cada cadeira.
+
+---
+
+### Iluminação
+
+A cafeteria possui um interruptor interativo.
+
+Ao se aproximar dele e pressionar `E`, a iluminação pode ser ligada ou desligada.
+
+Com a iluminação ligada, a cena utiliza uma iluminação geral combinada com três fontes de luz localizadas próximas às luminárias.
+
+Quando a iluminação é desligada, permanece apenas uma iluminação ambiente muito fraca, permitindo que o usuário ainda consiga visualizar parcialmente o cenário.
+
+---
+
+## Técnicas utilizadas
+
+### Modelagem
+
+Os objetos foram modelados a partir da combinação de primitivas geométricas.
+
+Objetos mais complexos foram construídos utilizando várias formas simples.
+
+Alguns exemplos:
+
+- a máquina de café utiliza corpo, painel frontal, display, botões, grupos, bandeja e vaporizador;
+- a registradora possui base, tela, suporte, teclado e botão de confirmação;
+- a vitrine possui estrutura, vidro, prateleiras e produtos;
+- o vaso sanitário possui base, bacia, assento, caixa acoplada e tampa;
+- a pia possui bancada, pedestal, cuba, ralo, torneira e registros;
+- a porta do banheiro possui folha, batente, guarnições e maçanetas dos dois lados.
+
+---
+
+### Transformações geométricas
+
+O projeto utiliza as três transformações exigidas:
+
+#### Translação
+
+Utilizada para posicionar objetos no ambiente.
+
+Exemplo:
+
+```cpp
+glTranslatef(x, y, z);
 ```
-LivroCurto       ≡ Livro ⊓ ∃numPaginas.(xsd:integer[≤ 250])
-LivroIniciante   ≡ Livro ⊓ temNivel value Iniciante
-LivroBemAvaliado ≡ Livro ⊓ ∃nota.(xsd:decimal[≥ 4.5])
-LeituraRapidaParaIniciante ≡ LivroCurto ⊓ LivroIniciante
+
+#### Rotação
+
+Utilizada na orientação dos objetos e também nas animações das portas.
+
+Exemplo:
+
+```cpp
+glRotatef(
+    angulo,
+    0.0f,
+    1.0f,
+    0.0f
+);
 ```
-**42 indivíduos:** 12 livros, 6 autores, 3 editoras, 4 gêneros, 9 temas, 3 níveis, 2 idiomas, 3 leitores (Ana, Bruno, Carla).
 
-## 3. Inferências demonstradas (`resultados.txt`)
-* **Classificação automática:** `LivroCurto` = L04, L05, L07, L09, L12; `LeituraRapidaParaIniciante` = L04, L05, L07, L12; `LivroBemAvaliado` = L01, L03, L04, L07, L09, L10; `LeitorIniciante` = Ana, Carla.
-* **Relações implícitas:** `AutorSilva escreveu L01` (inversa); `L04 ehPrerequisitoDe L03` (L04→L02→L03, transitividade); `L01 : LivroTecnico` (LivroDidatico ⊑ LivroTecnico).
-* **Consistência:** a base é consistente; ao declarar `LX : LivroTecnico ⊓ LivroFiccao` o reasoner detecta violação de disjunção.
+#### Escala
 
-## 4. Mecanismo de recomendação (`recomendar()`)
-Para o leitor R, um livro L é candidato se (i) L ∉ `jaLeu(R)`, (ii) `abordaTema(L) ∩ interessadoEm(R) ≠ ∅`, (iii) idioma(L) ∈ `prefereIdioma(R)`, (iv) nível(L) ≤ nível(R)+1. Pontuação = `3·|temas em comum| + nota + 1 (mesmo nível) + 0,5 (LivroCurto) − 1,5 (um nível acima)`. A **justificativa** lista os temas casados, o nível, a nota, as **classes inferidas pelo reasoner** e avisos de **pré-requisitos** (propriedade transitiva) ainda não lidos.
+Utilizada na modelagem de objetos como a porta e o vaso decorativo.
 
-Exemplo (Ana: IA e Programação, iniciante, já leu L04): 1º **L07 – IA em Quadrinhos** (9,20; LivroCurto, LeituraRapidaParaIniciante, LivroBemAvaliado), 2º L05 (8,70; ⚠ pré-requisito L01 não lido), 3º L01 (8,60). Bruno (EN aceito) recebe L10 em inglês, L02 (⚠ pré-requisito L04) e L09; Carla: L12 e L09.
+Exemplo:
 
-## 5. Análise crítica
-**Vantagens:** conhecimento explícito e reutilizável; justificativas por construção; inferência de classificação e pré-requisitos sem código; validação de consistência.
-**Limitações:** OWL não expressa pontuação/ranking nem preferências fracas (a recomendação tem uma camada procedural em Python); mundo aberto (ausência de `jaLeu` ≠ não leu); sem aprendizado de gosto do usuário; **cold-start** resolvido só por perfil declarado; base pequena. Poderia usar **SWRL/SPARQL** para a regra de recomendação.
+```cpp
+glScalef(
+    escalaX,
+    escalaY,
+    escalaZ
+);
+```
 
-<!-- evidencia-protege -->
-## Evidência no Protégé (HermiT 1.4.3.456)
-Além da execução por código (`rodar_reasoner.py`), a ontologia `livros.owl` foi aberta no **Protégé** com o reasoner **HermiT 1.4.3.456**. Os prints estão em `prints/` (legenda completa em `prints/LEIAME.md`):
+---
 
-* **Requisitos mínimos** — `01_metricas_ontologia.png`: 18 classes, 18 propriedades (12 de objeto + 6 de dados) e 42 indivíduos.
-* **Hierarquia e classes definidas** — `02_hierarquia_declarada_asserted.png` e `03_hierarquia_inferida_HermiT.png`.
-* **Classificação automática** — `05_LeituraRapidaParaIniciante_L04_L05_L07_L12.png`, `06_LivroBemAvaliado_6_instancias.png` e `11_dlquery_LeitorIniciante_Ana_Carla.png` (Ana e Carla).
-* **Reasoner** — `07_menu_reasoner_HermiT_1.4.3.456.png`.
-* **Consultas semânticas (DL Query)** — `08_dlquery_LivroCurto_5_instancias.png` (L04, L05, L07, L09, L12) e `09_dlquery_recomendacao_nivel_iniciante.png` (`Livro and (temNivel value Iniciante)` → L01, L04, L05, L07, L08, L12), base da recomendação.
-* **Consistência** — `10_inconsistencia_explicacao_HermiT.png`: um indivíduo temporário `LX` declarado em `LivroTecnico` e `LivroFiccao` (classes disjuntas) faz o HermiT acusar a inconsistência e explicá-la; `LX` foi removido e o `.owl` não foi alterado.
+### Iluminação
 
-*Observação:* a aba *Instances* da classe `LivroCurto` mostra só as instâncias **diretas** (`04_LivroCurto_instancia_direta_L09.png`, apenas L09); as demais pertencem à subclasse `LeituraRapidaParaIniciante`. A DL Query (print 08) mostra as cinco. Os resultados coincidem com `hermit_real.txt`.
+A iluminação foi implementada utilizando o sistema de iluminação do OpenGL.
+
+A cena possui:
+
+- iluminação ambiente;
+- iluminação difusa;
+- iluminação especular;
+- atenuação da intensidade da luz;
+- iluminação localizada;
+- spotlights sobre as mesas.
+
+São utilizadas as fontes:
+
+```text
+GL_LIGHT0
+GL_LIGHT1
+GL_LIGHT2
+GL_LIGHT3
+```
+
+`GL_LIGHT0` funciona como iluminação geral do ambiente.
+
+`GL_LIGHT1`, `GL_LIGHT2` e `GL_LIGHT3` representam as três luminárias posicionadas sobre as mesas.
+
+---
+
+### Materiais
+
+Os objetos possuem diferentes propriedades de material.
+
+Foram utilizados materiais para representar superfícies como:
+
+- madeira;
+- metal;
+- plástico;
+- vidro;
+- porcelana;
+- telas e displays.
+
+São utilizadas propriedades como reflexão especular e `GL_SHININESS` para produzir diferentes respostas à iluminação.
+
+---
+
+### Texturas
+
+O projeto utiliza mapeamento de textura em diferentes elementos da cena.
+
+As texturas utilizadas estão armazenadas em:
+
+```text
+assets/texturas/
+```
+
+Arquivos:
+
+```text
+cadeira.bmp
+menu.bmp
+mesa.bmp
+piso.bmp
+porta.bmp
+```
+
+---
+
+### Sistema de colisões
+
+Foi desenvolvido um sistema próprio de colisões para impedir que a câmera atravesse determinados objetos. O jogador é tratado como um círculo no plano XZ, e os obstáculos são retângulos (ou, no caso das portas, segmentos) nesse mesmo plano.
+
+Existem colisões com:
+
+- paredes externas;
+- paredes do banheiro;
+- porta principal;
+- porta do banheiro;
+- mesas;
+- cadeiras;
+- balcão;
+- prateleira atrás do balcão;
+- vaso sanitário;
+- pia.
+
+As cadeiras possuem colisão dinâmica, ou seja, a região de colisão acompanha a posição da cadeira quando ela é movimentada.
+
+Se uma porta ou uma cadeira em animação atingir o jogador, ele não fica preso: o movimento é liberado até que a câmera saia da região de colisão.
+
+---
+
+### Câmera
+
+A câmera utiliza navegação em primeira pessoa.
+
+A posição do jogador é controlada pelas teclas `W`, `A`, `S` e `D`, com velocidade de 2,0 unidades por segundo (constante `VELOCIDADE_MOVIMENTO` em `src/Controles/controles.cpp`). Como o movimento é multiplicado pelo tempo de cada quadro, a velocidade é a mesma em computadores diferentes.
+
+O mouse controla a rotação horizontal e vertical da câmera. Como a janela utiliza GLFW com o cursor capturado (`GLFW_CURSOR_DISABLED`), o movimento relativo funciona tanto em X11 quanto em Wayland.
+
+As setas `←`, `→`, `↑` e `↓` também rotacionam a câmera e servem como alternativa caso o mouse não esteja disponível.
+
+Também foi implementado deslizamento durante colisões. Dessa forma, quando o jogador tenta andar diagonalmente contra uma parede ou objeto, ainda é possível continuar o movimento pelo eixo que estiver livre.
+
+---
+
+## Estrutura do projeto
+
+```text
+cafeteria-opengl/
+│
+├── assets/
+│   └── texturas/
+│       ├── cadeira.bmp
+│       ├── menu.bmp
+│       ├── mesa.bmp
+│       ├── piso.bmp
+│       └── porta.bmp
+│
+├── src/
+│   │
+│   ├── Camera/
+│   ├── Colisoes/
+│   ├── Controles/
+│   ├── Interacoes/
+│   ├── Janela/
+│   ├── Renderizacao/
+│   ├── Sala/
+│   ├── Texturas/           # inclui stb_image.h
+│   │
+│   ├── Objetos/
+│   │   ├── Balcao/
+│   │   ├── Cadeira/
+│   │   ├── EspelhoBanheiro/
+│   │   ├── Interruptor/
+│   │   ├── JanelaCafe/
+│   │   ├── Luminaria/
+│   │   ├── MaquinaCafe/
+│   │   ├── Menu/
+│   │   ├── Mesa/
+│   │   ├── PiaBanheiro/
+│   │   ├── Porta/
+│   │   ├── PortaBanheiro/
+│   │   ├── PortaGuardanapos/
+│   │   ├── Prateleira/
+│   │   ├── Registradora/
+│   │   ├── Vasinho/
+│   │   ├── VasoSanitario/
+│   │   ├── Vitrine/
+│   │   └── Xicara/
+│   │
+│   └── main.cpp
+│
+├── docs/
+│   └── GUIA_CODIGO.md      # Explicação detalhada do código
+│
+├── CMakeLists.txt          # Compilação via CMake
+├── COORDENADAS.txt         # Referência de posições usadas na cena
+├── .gitignore
+├── build/                  # Gerado pelo CMake (não versionado)
+└── README.md
+```
+
+---
+
+## Requisitos
+
+- C++14;
+- CMake 3.20 ou superior;
+- OpenGL 2.1+ (compatibilidade);
+- GLU;
+- GLFW 3.4 ou superior (o CMake procura com `find_package(glfw3 3.4 REQUIRED)`);
+- `stb_image` (já incluído em `src/Texturas/`, não é preciso instalar).
+
+> O projeto exige **GLFW 3.4 ou superior**. Distribuições que ainda fornecem o GLFW 3.3 (por exemplo, Ubuntu 22.04) precisam compilar o GLFW a partir do código-fonte ou usar uma versão mais nova do sistema.
+
+---
+
+## Instalação das dependências
+
+### Linux
+
+**Fedora**
+
+```bash
+sudo dnf install gcc-c++ make cmake glfw-devel mesa-libGL-devel mesa-libGLU-devel
+```
+
+**Ubuntu / Debian (24.04 ou superior)**
+
+```bash
+sudo apt update
+sudo apt install build-essential cmake libglfw3-dev libgl1-mesa-dev libglu1-mesa-dev
+```
+
+**Arch Linux**
+
+```bash
+sudo pacman -S --needed base-devel cmake glfw mesa glu
+```
+
+### Windows (MSYS2 / MinGW-w64)
+
+1. Instale o [MSYS2](https://www.msys2.org/).
+2. Abra o terminal **MSYS2 UCRT64** (e não o "MSYS2 MSYS" nem o "MINGW64") e atualize os pacotes:
+
+```bash
+pacman -Syu
+```
+
+Se o terminal pedir para ser fechado durante a atualização, feche, abra o UCRT64 de novo e repita o comando.
+
+3. Instale o compilador, o CMake, o GLFW e o Ninja:
+
+```bash
+pacman -S --needed \
+    mingw-w64-ucrt-x86_64-toolchain \
+    mingw-w64-ucrt-x86_64-cmake \
+    mingw-w64-ucrt-x86_64-glfw \
+    mingw-w64-ucrt-x86_64-ninja
+```
+
+Quando o `pacman` perguntar quais pacotes do toolchain instalar, aperte `Enter` (instala todos).
+
+> **GLU no Windows:** não existe um pacote `glu` separado no MSYS2 UCRT64. A biblioteca GLU (`glu32`) acompanha o toolchain do MinGW-w64 e o próprio Windows, e o CMake a encontra sozinho. Se você tentar instalar `mingw-w64-ucrt-x86_64-glu`, o `pacman` responde `target not found` e cancela a instalação inteira.
+
+4. Para executar o programa **fora** do terminal MSYS2 (PowerShell ou duplo clique), adicione `C:\msys64\ucrt64\bin` à variável `PATH` do Windows (é de lá que vem a DLL do GLFW). Dentro do terminal UCRT64 isso já funciona automaticamente.
+
+> Alternativa: também é possível usar o **vcpkg + Visual Studio**. Nesse caso, instale o GLFW com `vcpkg install glfw3:x64-windows` e configure o CMake com `-DCMAKE_TOOLCHAIN_FILE=<caminho-do-vcpkg>/scripts/buildsystems/vcpkg.cmake`.
+
+### Dependências de execução
+
+- **Linux:** driver de vídeo com suporte a OpenGL (Mesa ou driver proprietário) e servidor gráfico X11 ou Wayland. Em ambientes sem GPU (por exemplo, WSL), use o WSLg ou um servidor X.
+- **Windows:** driver de vídeo com suporte a OpenGL e o `PATH` configurado para encontrar a DLL do GLFW, conforme acima.
+
+---
+
+## Como compilar
+
+A compilação é feita **exclusivamente com CMake**.
+
+### 1. Entre na pasta raiz do projeto
+
+Todos os comandos abaixo devem ser executados na **pasta raiz**, a que contém o `CMakeLists.txt`, a pasta `src/` e a pasta `assets/`.
+
+Ao extrair um arquivo `.zip`, o Windows pode criar uma pasta dentro de outra com o mesmo nome. Nesse caso, entre na pasta interna e confira:
+
+```bash
+ls CMakeLists.txt
+```
+
+Se o arquivo for listado, você está no lugar certo. Se aparecer "No such file", use `ls` e `cd` até encontrá-lo.
+
+No terminal MSYS2, o terminal sempre abre na pasta inicial do usuário e os discos do Windows ficam em `/c/`, `/d/` etc. Por exemplo:
+
+```bash
+cd /c/Users/SEU_USUARIO/Downloads/cafeteria-opengl
+```
+
+Use aspas se o caminho tiver espaços: `cd "/c/Users/SEU_USUARIO/Downloads/minha pasta"`.
+
+### 2. Compile
+
+**Linux**
+
+```bash
+cmake -S . -B build
+cmake --build build
+```
+
+**Windows (terminal MSYS2 UCRT64)**
+
+```bash
+cmake -S . -B build -G Ninja
+cmake --build build
+```
+
+**Compilação Release**
+
+```bash
+cmake -S . -B build -DCMAKE_BUILD_TYPE=Release
+cmake --build build
+```
+
+> Em geradores multi-config, como o Visual Studio, use `cmake --build build --config Release`. Nesse caso, o executável fica em `build/Release/`.
+
+> **Pasta `build/` antiga:** se já existir uma pasta `build/` vinda de outro computador ou de outro sistema (por exemplo, um binário de Linux copiado para o Windows), apague-a antes de configurar: `rm -rf build`. A pasta `build/` é gerada pelo CMake e não faz parte do código-fonte.
+
+---
+
+## Como executar
+
+Execute a partir da **raiz do projeto**: os caminhos de textura (`assets/texturas/...`) são relativos ao diretório de trabalho. Também é possível rodar de dentro de `build/`, pois o CMake copia `assets/` para lá após a compilação.
+
+**Linux**
+
+```bash
+./build/cafeteria_opengl
+```
+
+**Windows, no terminal MSYS2 UCRT64**
+
+```bash
+./build/cafeteria_opengl.exe
+```
+
+**Windows, no PowerShell** (exige `C:\msys64\ucrt64\bin` no `PATH`, conforme a instalação das dependências)
+
+```powershell
+.\build\cafeteria_opengl.exe
+```
+
+### Usar no CLion (opcional)
+
+1. Abra a pasta raiz do projeto no CLion.
+2. Certifique-se de que o `CMakeLists.txt` esteja na raiz.
+3. Configure um toolchain com MinGW ou outro compilador C++ compatível.
+4. Aguarde a configuração do CMake e compile/execute o alvo `cafeteria_opengl`.
+
+---
+
+## Organização do código
+
+### `Camera`
+
+Responsável pela posição, movimentação e orientação da câmera.
+
+### `Controles`
+
+Responsável pela leitura das teclas e do movimento do mouse.
+
+### `Interacoes`
+
+Responsável pelo estado e pelas animações dos objetos interativos.
+
+### `Colisoes`
+
+Implementa as verificações de colisão da câmera com paredes e objetos.
+
+### `Janela`
+
+Responsável pela criação da janela e do contexto OpenGL com GLFW.
+
+### `Renderizacao`
+
+Coordena a renderização da cena e contém primitivas utilizadas na modelagem.
+
+### `Texturas`
+
+Realiza o carregamento e gerenciamento das texturas BMP (usa `stb_image`).
+
+### `Sala`
+
+Contém a estrutura principal da cafeteria.
+
+### `Objetos`
+
+Contém os diferentes objetos modelados para compor a cena.
+
+---
+
+## Requisitos atendidos
+
+| Requisito | Implementação |
+|---|---|
+| Mínimo de 8 objetos modelados | Mais de 15 tipos de objetos modelados |
+| Translação | `glTranslatef()` |
+| Rotação | `glRotatef()` |
+| Escala | `glScalef()` |
+| Navegação | W/A/S/D + mouse (setas como alternativa) |
+| Pelo menos 3 interações | Portas, cadeiras e iluminação |
+| Iluminação | Luz geral + três luminárias |
+| Materiais distintos | Madeira, metal, porcelana, plástico, vidro etc. |
+| Mapeamento de textura | Piso, mesas, cadeiras, porta e cardápio |
+| Sem motor gráfico | OpenGL utilizado diretamente |
+
+---
+
+## Equipe
+
+- Leandro Marcio Elias da Silva
+- Daniel de Araujo Albuquerque
+- Guilherme Alessander da Silva Fernandes

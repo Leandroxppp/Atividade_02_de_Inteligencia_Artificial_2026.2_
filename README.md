@@ -12,7 +12,7 @@ Cada pasta `Questao_N/` tem um `README.md` com o relatório e, quando aplicável
 | 6 | Sistema fuzzy de Mamdani (risco de crédito) | `fuzzy_credito.py`, `fuzzy_skfuzzy.py` |
 | 7 | CBR de diagnóstico médico (Retrieve/Reuse/Revise/Retain) | `cbr_medico.py` |
 | 8 | Rede Bayesiana de pneumonia | `rede_bayesiana.py`, `rede_pgmpy.py`, `pneumonia.bif` |
-| 9 | Recomendação de livros com ontologia OWL | `ontologia_livros.py`, `livros.owl` |
+| 9 | Recomendação de livros com ontologia OWL (demo e **modo interativo `--usuario`**) | `ontologia_livros.py`, `livros.owl` |
 | 10 | Buscas BFS/DFS/UCS/A* e versão com D e F | `busca.py` |
 | 11 | Agente clássico × agente LLM (planejamento) | `planejador_classico.py` |
 | 12 | Assistente acadêmico baseado em LLM | `agente_llm.py` |
@@ -40,4 +40,6 @@ Todos os scripts foram executados e as saídas estão guardadas (`resultados.txt
 ## Dependências e execução
 Python 3, `numpy`, `matplotlib`, `networkx`. Extras: `scikit-fuzzy`, `pgmpy`, `owlready2` (+ Java para o HermiT). Rodar: `cd Questao_N && python <script>.py` (no Windows: `set PYTHONIOENCODING=utf-8` antes, para os acentos).
 
-**Demonstração:** vídeo `demo_lista2.mp4` (≈1min40s, execução no terminal dos scripts das Q7 [CBR], Q8 [rede bayesiana] e Q9 [ontologia + reasoner]).
+**Q9 (entrada do usuário):** `python ontologia_livros.py` executa a demonstração com os leitores Ana, Bruno e Carla; `python ontologia_livros.py --usuario` pergunta nome, temas, nível, idiomas e livros já lidos, insere o perfil como novo indivíduo `Leitor`, roda o reasoner e exibe as recomendações justificadas.
+
+**Demonstração:** vídeo `demo_lista2.mp4` (≈3min50s, execução no terminal dos scripts das Q7 [CBR], Q8 [rede bayesiana] e Q9 [ontologia + reasoner no Protégé e por código, recomendações para Ana, Bruno e Carla, e modo interativo com perfil informado pelo usuário]).
