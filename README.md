@@ -27,7 +27,7 @@ Todos os scripts foram executados e as saídas estão guardadas (`resultados.txt
 |---|---|---|
 | Q9 e Q15 | **HermiT** (Owlready2 + Java): consistência, classificação automática, inversas/transitivas e teste de inconsistência; coincide com o reasoner mínimo em Python | `Questao_9/hermit_real.txt`, `Questao_15/hermit_real.txt` |
 | Q6 | Versão **scikit-fuzzy** executada; centroides iguais aos do NumPy (±0,2) | `Questao_6/skfuzzy_real.txt` |
-| Q8 | Versão **pgmpy** executada; `OK` em todas as consultas. Também exportada para **GeNIe** (`pneumonia.xdsl`, não aberto no GeNIe) | `Questao_8/pgmpy_real.txt`, `pneumonia.xdsl` |
+| Q8 | Versão **pgmpy** executada; `OK` em todas as consultas. Também exportada e validada no **GeNIe Trial** (`rede_pneumonia.xdsl`, prints em `Questao_8/prints/`) | `Questao_8/pgmpy_real.txt`, `rede_pneumonia.xdsl` |
 | Q12 | Caminho LLM testado com **LLM local via Ollama** (`llama3.2` e `qwen2.5:7b`): verificador, nova tentativa com feedback e alternativa offline; também com servidor simulado | `Questao_12/Q12_llm_ollama.txt`, `Q12_llm_qwen.txt`, `llm_stub_test.txt` |
 | Q14 | Script Cypher executado no **Neo4j 5** (Docker + `cypher-shell`); respostas iguais às do `kg_saude.py` | `Questao_14/Q14_neo4j.txt` |
 
